@@ -1,0 +1,13 @@
+<div class="container-fluid col-md-10 rounded-lg border border-white pt-4 bg-success text-center">
+<h1 class="text-light mb-2 font-weight-bold" style="color: black;">LE DOMAINE EN CHIFFRES</h1>
+<hr style="border: 1px solid white;">
+    <div class="row">
+    {% for stats in statBlock %}
+      <div class="col-lg-3 mt-3">
+        <img src="/uploads/statIcon/{{ stats.icon }}" alt="" class="img-fluid" width="70px" height="70px">
+        <h2 style="font-size: 3rem; font-weight: bold; color: black;"><i>{{ stats.number }} {{ stats.unit }}</i></h2>
+        <p class="text-light" style="font-size: 1.5rem;"><i>{{ stats.text | raw }}</i></p>
+      </div>
+    {% endfor %}
+    </div>
+</div>

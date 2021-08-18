@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Valider ma commande - Ma boutique{% endblock %}
+
+{% block stylesheets %}
+    <link href={{ asset('assets/css/order.css')}} rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid col-md-10 text-light">
+    <h2 class="text-warning">Ma commande</h2>
+    <p class="text-warning"><i>Choisissez vos préférences de livraison avant de passer votre commande sur "Rhuma Sug".</i></p>
+    <div class="dropdown-divider"></div>
+    <div class="row mt-4">
+        <div class="col-md-5">
+        {% set formHtml %}
+            {# Pour spécifier à notre formulaire dans Symfony que je veux que l'action de soumission de notre formulaire se fasse sur une URL différente de celle sur laquelle nous nous trouvons
+             je vais décomposer le formulaire avec form_start et form_end afin de pouvoir indiquer en 2ème paramètre de mon form_start une action à réaloiser avec un path à suivre.
+             Je lui dit donc d'aller sur order_recap pour soumettre emon formulaire. C'est la fonction add() qui va gérer ce formulaire ! #}
+            {{ form_start(form, {action: path('order_recap')}) }}
+            {# J'ai la possibilité dans TWIG de dire que je veux gérer moi même certains éléments de mon formulaire. ici, je souhaite gérer moi même le label du champs addresses #}
+            {{ form_label(form.addresses, 'CHOIX DE L\'ADRESSE DE LIVRAISON') }}
+            <p class="mb-3"><a href="{{ path('account_address_add') }}" class="badge badge-success badge-pill p-2"><i class="fas fa-plus"></i> AJOUTER UNE ADRESSE</a></p>
+            {{ form_row(form.addresses) }}
+            {# {{ form_row(form.carriers, 'CHOIX DU TRANSPORTEUR') }} #}
+            {{ form_label(form.carriers, 'CHOIX DU TRANSPORTEUR') }}
+            <p class="mb-3"><a href="{{ path('carrier_list') }}" class="badge badge-success badge-pill p-2"><i class="fas fa-eye"></i> LISTE DES TRANSPORTEURS</a></p>
+            {# {{ form_row(form.carriers) }} #}
+
+            {# <div class="col-md-12 p-3">
+                <div class="row">
+                        {{ form_row(form.carriers) | raw }}
+                    {% for carrier in carriers %}
+                        <div class="col-md-4 text-center m-auto mb-3">
+                            <img src="/uploads/carrier/{{ carrier.logo }}" alt="{{ carrier.name }}" class="img-fluid">
+                        </div>
+                    {% endfor %}
+                </div>
+            </div> #}
+
+
+            {{ form_end(form) }}
+        {% endset %}
+        {{ formHtml | replace({'[br]' : '<br/>'}) | raw }}
+        {# {{ form(form) }} #}
+        </div>
+
+        <div class="col-md-7">
+        <div class="text-center mt-2">
+            <p class="text-warning mb-4"><b>RECAPITULATIF DE COMMANDE</b></p>
+        </div>
+        <div class="order-summary">
+             {# {{dump(cart)}} #}
+
+        {% set total = 0 %}
+		{% set nbProducts = 0 %}
+        {% for key, product in cart %}
+
+        <div class="row {% if key > 0 %} mt-3 {% endif %} alert alert-warning text-dark">
+            <div class="col-2"> <img src="/uploads/products/{{ product.product.illustration }}" alt="{{ product.product.name }}" height="75px" class="border border-dark"></div>
+            <div class="col-3 my-auto">
+                <b>{{ product.product.name }}</b><br/>
+                {# <small><i>{{ product.product.subtitle }}</i></small> #}
+            </div>
+            <div class="col-2 my-auto">
+                <b>{{ product.product.conditioning.container }} {{ product.product.conditioning.volume }}</b><br/>
+            </div>
+            <div class="col-1 my-auto">
+                <b>{{ product.product.characteristic.degree }} °</b><br/>
+            </div>
+            <div class="col-2 my-auto"><b>x {{ product.quantity }}</b></div>
+            <div class="col-2 my-auto"><b>{{ (product.product.price / 100)  | number_format(2, ',', '.')}} €</b></div>
+        </div>
+
+        {% set total = total + (product.product.price * product.quantity) %}
+		{% set nbProducts = nbProducts + (product.quantity * 1) %}
+        {% endfor %}
+        </div>
+        <div class="text-right  text-light mt-4 mb-3">
+				<b>NB DE PRODUITS :
+					<span class="badge badge-warning p-2 text-dark mb-3" style="font-size: 1rem;">{{ nbProducts }}</span></b><br/>
+
+					<!-- We define a session variable ('key', value) -->
+					{{ app.session.set('nbP', nbProducts) }}
+
+				<b>TOTAL PANIER :
+					<span class="badge badge-warning p-2 text-dark" style="font-size: 1rem;">{{ (total / 100) | number_format(2, ',', '.') }}
+					€</span></b>
+        </div>
+        <div class="dropdown-divider"></div>
+        {# <a href="{{ path('cart') }}" class="text-left text-dark"><img src="{{ asset('assets/img/back-arrow.png') }}" alt="Mes commandes"> <b> Retours au panier</b></a> #}
+        <a href="{{ path('cart') }}" class="text-light text-left" style="font-size: 1.2rem; text-decoration: none;"><i class="fas fa-arrow-circle-left"></i> RETOUR AU PANIER</b></a>
+    </div>
+</div>
+
+
+<div class="row col-md-12 mt-5 mb-5">
+  {% include 'template_parts/_reassurance.html.twig' %}
+</div>
+
+</div>
+        
+{% endblock %}
+

@@ -1,0 +1,209 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon panier - Rhuma Sug
+{% endblock %}
+
+{# {% block nav %}
+	{% include "template_parts/_navCart.html.twig" %}
+{% endblock %} #}
+
+{% block body %}
+
+<div class="container-fluid col-md-10">
+
+<h1 class="text-warning">
+<i class="fas fa-cart-arrow-down"></i> Votre panier d'achat ~ 
+{% if cart | length > 0%}
+{% set nbProducts = 0 %}
+{% for product in cart %}
+{% set nbProducts = nbProducts + (product.quantity * 1) %}
+<span class="badge badge-warning p-2 text-dark" style="font-size: 2rem;"><b>{% if nbProducts == 1 %} {{ nbProducts }} article {% else %} {{ nbProducts }} articles {% endif %}</b></span><br/>
+{% endfor %}
+{% endif %}
+</h1>
+
+<div class="dropdown-divider mb-4"></div>
+{# <p>Retrouvez l'ensemble des produits que vous avez ajoutés à votre panier</p> #}
+
+{# {{ dump(cart)}} #}
+
+{% if cart | length > 0%}
+
+	<table class="table mt-5">
+		<thead>
+			<tr>
+				<th scope="col" class="text-light">Illustration</th>
+				<th scope="col" class="text-light" style="width: 23%">Désignation</th>
+				<th scope="col" class="text-center text-light align-middle">Conditionnement</th>
+				<th scope="col" class="text-center text-light align-middle">Degré</th>
+				{# <th scope="col" class="text-center text-light align-middle">Taille</th>
+				<th scope="col" class="text-center text-light align-middle">Couleur</th> #}
+				<th scope="col" class="text-center text-light align-middle">Quantité</th>
+				<th scope="col" class="text-center text-light align-middle">Prix</th>
+				<th scope="col" class="text-center text-light align-middle">Total</th>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% set total = 0 %}
+			{% set nbProducts = 0 %}
+			{% for product in cart %}
+				{# {{ dump(product)}} #}
+				<tr class="alert alert-warning">
+					<th class="align-middle"><img src="/uploads/products/{{ product.product.illustration }}" alt="{{ product.product.name }}" height="75px" class="border border-dark"><br/></th>
+					<td class="align-middle">
+						<b class="text-dark">{{ product.product.name }}</b><br/>
+						<small class="text-dark"><i>{{ product.product.subtitle }}</i></small>
+					</td>
+					{# <td class="text-center text-dark align-middle">
+						<b class="text-dark">{{ product.product.name }}</b><br/>
+					</td> #}
+					<td class="text-center align-middle">
+						<b class="text-dark">{{ product.product.conditioning.container }} {{ product.product.conditioning.volume}}</b><br/>
+					</td>
+					<td class="text-center align-middle">
+						<b class="text-dark">{{ product.product.characteristic.degree }} °</b><br/>
+					</td>
+					<td class="text-center text-dark align-middle">
+						<div>
+							{# <label class="wrapper-title">Qty</label> #}
+								<div class="text-center text-dark align-middle">
+									<a href="{{ path('decrease_to_cart', {'id': product.product.id}) }}">
+									<i class="fas fa-arrow-circle-down fa-2x text-danger"></i>
+									{# <i class="fa fa-minus border text-light bg-danger p-2 rounded-circle shadow-lg"></i> #}
+									</a>
+									<input id="quantity" type="text" name="quantity" value="{{ product.quantity }}" maxlength="3" size="2" class="text-center" style="height: 60px; font-weight: bold; font-size: 30px;">
+									<a href="{{ path('add_to_cart', {'id': product.product.id}) }}">
+									<i class="fas fa-arrow-circle-up fa-2x text-success my-auto"></i>
+									{# <i class="fa fa-plus border text-light bg-success p-2 rounded-circle"></i> #}
+									</a>
+								</div>
+							</div>
+
+{# {{ dump(cart)}} #}
+
+
+
+						{# <div class="row">
+							<a href="{{ path('decrease_to_cart', {'id': product.product.id}) }}" style="border-radius: 50%; width: 2rem; height: 2rem; line-height: 2rem; background-color: red; text-align: center; box-shadow: 10px 5px 20px grey;">
+								<img src="{{ asset('assets/img/minus (64px).png') }}" alt="Retrancher une quantité" height="10px">
+							</a>
+							<p class="text-center my-auto" style="width: 3rem; border: 1px solid black; background-color: #dfe4ea; height: 2rem; margin: 0 12px 0 12px; box-shadow: 10px 5px 20px grey; line-height: 2rem; font-weight: bold">
+								x
+								{{ product.quantity }}</p>
+							<a href="{{ path('add_to_cart', {'id': product.product.id}) }}" style="border-radius: 50%; width: 2rem; height: 2rem; background-color: lightgreen; text-align: center; box-shadow: 10px 5px 20px grey; line-height: 2rem;">
+								<img src="{{ asset('assets/img/add (64px).png') }}" alt="Ajouter une quantité" height="10px">
+							</a>
+						</div> #}
+					</td>
+					<td class="text-center align-middle text-dark"><b>{{ (product.product.price / 100)  | number_format(2, ',', '.')}} €</b></td>
+					<td class="text-center align-middle text-dark"><b>{{ ((product.product.price * product.quantity) / 100)  | number_format(2, ',', '.')}} €</b></td>
+					<td class="text-center align-middle">
+						<a href="{{ path('delete_to_cart', { 'id' : product.product.id }) }}"><img src="{{ asset('assets/img/delete (64px).png') }}" alt="Supprimer mon produit" height="25px"></a>
+					</td>
+
+				</tr>
+
+				{% set total = total + (product.product.price * product.quantity) %}
+				{% set nbProducts = nbProducts + (product.quantity * 1) %}
+			{% endfor %}
+		</tbody>
+	</table>
+	{# <div class="text-left mb-5"> #}
+	{# <div class="dropdown-divider"></div>
+		<a href="{{ path('products') }}">
+			<b class="text-left text-light" style="font-size: 1.2rem; text-decoration: none;"><i class="fas fa-arrow-circle-left"></i>
+				CONTINUER MES ACHATS</b>
+		</a> #}
+		{# <div> #}
+			<div class="text-right text-light mb-5">
+				<b>NB DE PRODUITS :
+					{# {{ cart | length }}</b><br/> #}
+					<span class="badge badge-warning p-2 text-dark mb-3" style="font-size: 1rem;">{{ nbProducts }}</span></b><br/>
+
+					<!-- We define a session variable ('key', value) -->
+					{{ app.session.set('nbP', nbProducts) }}
+
+				<b>TOTAL PANIER :
+					<span class="badge badge-warning p-2 text-dark" style="font-size: 1rem;">{{ (total / 100) | number_format(2, ',', '.') }}
+					€</span></b>
+				<a href="{{ path('order') }}" class="col-md-3 m-auto p-3 btn btn-success btn-block mt-5"><b>VALIDER MON PANIER</b></a>
+			</div>
+		{% else %}
+			<hr>
+			<div
+				class="container-fluid col-md-12 alert alert-warning p-3 mb-5 rounded-lg">
+				{# <p><b>Votre panier est vide !</b></p> #}
+				<h1 class="text-center mt-3">VOTRE PANIER EST TRISTEMENT VIDE !</h1>
+
+				<div class="text-center"><img src="{{ asset('assets/img/sad.png') }}" alt="Image produit" class="img-fluid text-center mt-2 mb-3" style="width: 7rem; height: 7rem;"></div>
+
+				<div class="container col text-center">
+					<a href="{{ path('products') }}" class="btn btn-warning btn-lg text-dark">
+						En manque d'inspiration ?</a>
+				</div>
+				{{ app.session.set('nbP', '0') }}
+			
+			</div>
+			{# <div class="text-left mb-5">
+				<a href="{{ path('products') }}">
+					<b class="text-left text-dark"><img src="{{ asset('assets/img/back-arrow.png') }}" alt="Mes commandes">
+						Revenir sur la boutique</b>
+				</a>
+			<div> #}
+
+		{# <div class="container-fluid col-md-12">
+        <div class="dropdown-divider mt-4"></div>
+        <a href="{{ path('account') }}" class="text-light text-left" style="font-size: 1.2rem; text-decoration: none;"><i class="fas fa-arrow-circle-left"></i> RETOUR</b></a>
+        </div> #}
+
+{% endif %}
+
+{# <div class="col-md-12 mt-5 rounded-lg alert alert-success text-denter">
+  {% include 'template_parts/_reassurance.html.twig' %}
+</div> #}
+ {# <div class="col-md-12 mt-4 mb-4">
+  {% include 'template_parts/_stat-section.html.twig' %}
+</div> #}
+
+
+{# <div class="container-fluid col-md-12">
+    <div class="dropdown-divider mt-4"></div>
+    <a href="{{ path('account') }}" class="text-light text-left" style="font-size: 1.2rem; text-decoration: none;"><i class="fas fa-arrow-circle-left"></i> RETOUR</b></a>
+</div> #}
+
+
+<div class="dropdown-divider"></div>
+<a href="{{ path('products') }}">
+	<b class="text-left text-light" style="font-size: 1.2rem; text-decoration: none;"><i class="fas fa-arrow-circle-left"></i>
+	CONTINUER MES ACHATS</b>
+</a>
+
+
+{# <div class="bg-dark p-2 pb-3 w-auto" style="width: 100%"> #}
+<h3 class="mt-4 text-warning">Nos clients plébiscitent également !</h3>
+<p class="text-warning"><i>Une sélection des articles les plus vendus.</i></p>
+<div class="container-fluid mt-5 mb-5">
+	<div class="row">
+
+		{% for product in products %}
+			<div class="col-md-3">
+				{% include 'template_parts/_bestProducts.html.twig' %}
+			</div>
+		{% endfor %}
+	</div>
+</div>
+
+<div class="col-md-12 mt-5 mb-5 rounded-lg alert alert-success text-denter">
+  {% include 'template_parts/_reassurance.html.twig' %}
+</div>
+{# </div> #}
+
+
+	</div>
+	</div>
+	</div>
+
+	{% endblock %}
+
+	{% block footer %}{% endblock %}

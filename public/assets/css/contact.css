@@ -1,0 +1,25 @@
+body {
+    /* background: url('https://i.ibb.co/3zwVs25/pexels-photo-3.png" alt="pexels-photo-3') fixed; */
+    /* background: url('https://images.pexels.com/photos/7254446/pexels-photo-7254446.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="pexels-photo-3') fixed; */
+    background: url('https://images.pexels.com/photos/7254446/pexels-photo-7254446.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') fixed;
+    background-size: cover;
+    margin-top: 12vh;
+}
+
+.separateur{
+    border: 1px solid black;
+}
+.big-separateur{
+    border: 4px solid black;
+}
+.contact-form{
+    color: black;
+    opacity: 0.9;
+}
+.block-address{
+    opacity: 0.9;
+}
+.title{
+    color: black;
+    opacity: 0.8;
+}

@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+ <link rel="stylesheet" href="{{ asset('assets/css/contact.css') }}"/>
+{% endblock %}
+
+{% block javascripts %}
+	<!-- Ajout de l'API Recaptcha dans notre document -->
+    <script src="//www.google.com/recaptcha/api.js?h1={{ app.request.locale }}"></script>
+{% endblock %}
+
+{% block title %}Nous contacter - Rhuma Sug{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row title bg-light p-4 rounded-lg">
+        <h1><img src="{{ asset('assets/img/send-mail-1.png') }}" alt="email" class="mr-1" style="width: 60px; height: 60px;"> Nous contacter</h1>
+        <h4 class="m-auto"><i>Une question ? un problème ? ... nous sommes à votre écoute.</i></h4>
+    </div>
+
+    {% for message in app.flashes('notice') %}
+        <div class="alert alert-success mt-4 ">{{ message }}</div>
+    {% endfor %}
+
+    <div class="row mt-4 mb-5">
+        <div class="contact-form col-md-8 bg-light p-4 rounded-lg">
+        {# {{ form(form) }} #}
+        <div class="row">
+        <div class="col-md-6">
+        {{ form_start(form) }}
+        {{ form_row(form.firstname) }}
+        </div>
+        <div class="col-md-6">
+        {{ form_row(form.lastname) }}
+        </div>
+        </div>
+        {{ form_row(form.email) }}
+        {{ form_row(form.subject) }}
+        {{ form_row(form.content) }}
+        {{ form_row(form.captcha) }}
+        {{ form_row(form.submit) }}
+        {{ form_end(form) }}
+        </div>
+        <div class="col-md-4">
+        <div class="block-address bg-light p-3 rounded-lg">
+            <hr class="big-separateur">
+            <strong style="font-size: 1rem; color: grey"><img src="{{ asset('assets/img/logo3.png') }}" alt="logo " class="img-fluid"  style="width: 80px; height: 45px;"/> "Rhuma Sug"</strong>
+            <hr class="separateur">
+            <b><p style="font-size: 1rem; color: grey">06 20 30 40 50<br/>
+                10 avenue des Champs-Elysées<br/>
+                75000 Paris<br/>
+                contact.rhumasug@gmail.com</p></b>
+            <hr class="big-separateur">
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% block footer %}{% endblock %}    
+
+{% endblock %}
+

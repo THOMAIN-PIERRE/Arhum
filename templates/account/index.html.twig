@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte - Rhuma Sug{% endblock %}
+
+{% block stylesheets %}
+    <link href={{ asset('assets/css/account.css')}} rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+{% if is_granted('ROLE_ADMIN') %}
+    {# <div class="container"> #}
+    <div class="float-right">
+        {# <a href="/admin"><b class="badge badge-primary p-3"><img src="{{ asset('assets/img/access-admin.png') }}" alt="Accès à l'administation"> Administration du site</b></a> #}
+        <a href="/admin" target="_blank"><b class="badge badge-warning text-dark p-2" style="font-size: 1rem;"-top><i class="fas fa-cogs"></i> ADMINISTRATION DU SITE</b></a>
+    </div>
+    {% else %}
+    <i class="fas fa-user fa-3x pull-right text-warning"></i>
+        {# <small><a href="/admin"><b>Accéder au backoffice</b></a></small><br/> #}
+    {% endif %}
+    <h1 class="text-warning">MON COMPTE</h1>
+    <div class="dropdown-divider"></div>   
+    {# {% if is_granted('ROLE_ADMIN') %}
+
+    <div class="text-right">
+        <a href="/admin"><b class="text-primary"><img src="{{ asset('assets/img/access-admin.png') }}" alt="Accès à l'administation"> Administration du site</b></a>
+    </div #}
+        {# <small><a href="/admin"><b>Accéder au backoffice</b></a></small><br/> #}
+    {# {% endif %} #}
+    <br/>
+    <p class="text-light">Bienvenue dans votre espace personnel <b class="text-warning">{{ app.user.firstname | upper }}</b></p>
+    <p class="text-light">{% if app.user.gender == 0 %} Cliente depuis {% else %} Client depuis {% endif %}<b class="text-warning"><i class="far fa-calendar-alt"></i> {{ app.user.createdAt | date ('Y') }}</b></p>
+    {# <p>Vous êtes dans l'espace de gestion de vos données personnelles :</p> #}
+    {# <hr> #}
+
+    <div class="container mt-4 mb-5">
+    <div class="row d-flex justify-content-around">
+    {# <div class="d-flex justify-content-around"> #}
+    {# <div class="col-md-3 mb-3 p-5 prev-account-item">
+        <a href="{{ path('compte_commande') }}"> 
+        <div class="row">
+            <div class="col-md-12">
+                <i class="fa fa-boxes fa-4x"></i>
+                <h3>COMMANDES</h3>
+                Suivi, Historique
+            </div>
+        </div>
+        </a>
+    </div>  #}
+        {# <div class="col-md-5  mb-3 p-5 prev-account-item">
+            <a href="{{ path('adresse') }}">
+        <div class="row">
+            <div class="col-md-4 ">
+             <i class="fa fa-map-marker-alt fa-4x"></i>
+            </div>
+            <div class="col-md-8">
+               <h3>COORDONNEES</h3>
+                    Adresse (livraison et facturation), Téléphone 
+            </div>
+        </div>
+        </a>
+    </div>  #}
+    
+    <div class="col-md-5 mb-4 p-5 prev-account-item">
+            <a href="{{ path('account_profile') }}">
+                <i class="fa fa-users fa-4x mb-3"></i>
+                <h3>MON PROFIL</h3>
+                Gérer mes informations personnelles
+        </a>
+    </div>
+    <div class="col-md-5 mb-4 p-5 prev-account-item">
+            <a href="{{ path('account_password') }}">
+                <i class="fa fa-lock fa-4x mb-3"></i>
+                <h3>MON MOT DE PASSE</h3>
+                Gestion de mon mot de passe
+        </a>
+    </div>  
+    <div class="col-md-5 mb-4 p-5 prev-account-item">
+            <a href="{{ path('account_address') }}">
+                <i class="fa fa-map-marker-alt fa-4x mb-3"></i>
+                <h3 class="text-center">COORDONNEES</h3>
+                <span>Adresse de livraison, Téléphone</span>
+            </a>
+                <p class="btn btn-secondary text-light mt-2"><b><span class="badge badge-warning border border-dark text-dark">{{ app.user.addresses | length }}</span> adresse(s) renseignée(s)</b></p>
+    </div>
+    <div class="col-md-5 mb-4 p-5 prev-account-item">
+            <a href="{{ path('account_order') }}"> 
+                <i class="fa fa-boxes fa-4x mb-3"></i>
+                <h3>MES ACHATS</h3>
+                <span>Historique des commandes, des produits, des commentaires</span><br>
+            </a>
+                {# <p class="btn btn-secondary text-light mt-2"><b><span class="badge badge-warning border border-dark text-dark"> commande(s) effectué(es). <span class="badge badge-warning  border border-dark text-dark">{{ nbOfInProgressOrder}}</span> commande(s) en cours de livraison.</b></p> #}
+                {# <p class="col-9 btn btn-secondary text-light text-left mt-2"><b><span class="badge badge-warning border border-dark text-dark">{{ (app.user.orders | length) - (nbOfNullPayment | length) }}</span> commande(s) effectué(es). <span class="badge badge-warning border border-dark text-dark">{{ nbOfInProgressOrder}}</span> commande(s) en cours de livraison.</p></b></p> #}
+                <p class="col-9 btn btn-secondary text-light text-left mt-2"><b><span class="badge badge-warning border border-dark text-dark">{{ orders | length }}</span> commande(s) effectué(es).</b></p>
+    </div>
+    </div> 
+    </div> 
+  </div>
+
+{# <p class="image">
+    <img src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg" alt="" />
+    <span>Ton texte</span>
+</p> #}
+
+
+<div class="container mb-5">
+<div class="dropdown-divider mt-4"></div>
+<a href="{{ path('products') }}" class="text-light text-left" style="font-size: 1.2rem; text-decoration: none;"><i class="fas fa-arrow-circle-left"></i> RETOUR</b></a>
+</div>
+
+{% endblock %}

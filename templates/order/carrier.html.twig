@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Livraison{% endblock %}
+
+{% block body %}
+
+<!-- PRICING TABLE STYLE 1-->
+    {# <h1 class="text-warning"><i class="fas fa-shipping-fast mr-2"></i> LES MODES DE LIVRAISON</h1>
+    <div class="dropdown-divider mt-5"></div> #}
+        <div class="container-fluid col-10 mt-5 mb-5">
+        <h1 class="text-warning"><i class="fas fa-shipping-fast mr-2"></i> LES MODES DE LIVRAISON</h1>
+        <div class="dropdown-divider mb-5"></div>
+            <div class="row">
+                {% for carrier in carriers %}
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 m-auto">        
+                        <div class="price_table_container mb-5">
+                            <div class="bg-secondary rounded-lg text-center text-light p-3" style="font-size: 1.5rem; height: 6rem;">{{ carrier.name | upper }}</div>
+                                <div class="bg-warning rounded-lg mt-2 text-dark p-5 m-auto" style="font-size: 1.2rem; height: 25rem;">
+                                    <p class="price_table_row cost warning-bg text-center" style="font-size: 2rem;"><strong>{{ (carrier.price / 100)  | number_format(2, ',', '.')}} €</strong></p>
+                                    <p class="text-center">{{ carrier.description | raw}}</p>
+                                </div>
+                            <div class="bg-success rounded-lg mt-2 text-center text-dark p-3" style="height: 8rem;"><img src="/uploads/carrier/{{ carrier.logo }}" width="140px" height="100px" style="text-center" class="rounded-lg"></div>
+                        </div>
+                    </div>  
+                {% endfor %}  
+            </div>
+        <div class="dropdown-divider mt-5"></div>
+            <a href="{{ path('order') }}" class="text-light text-left" style="font-size: 1.2rem; text-decoration: none;"><i class="fas fa-arrow-circle-left"></i> RETOUR A LA COMMANDE</b></a>
+        </div>
+
+    </div>
+
+{% endblock %} 

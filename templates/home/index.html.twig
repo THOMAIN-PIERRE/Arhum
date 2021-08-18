@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+{% block carousel %}   
+    {% include "template_parts/_carousel.html.twig" %}
+{% endblock %}
+
+
+<div>
+  {% include "template_parts/_partner.html.twig" %}
+</div>
+    
+        <hr>
+        <div class="container-fluid">
+        <!-- Four columns of text below the carousel -->
+        <h3 class="mt-4 text-warning">Nos clients plébiscitent également !</h3>
+        <p class="text-warning"><i>Une sélection des articles les plus vendus.</i></p>
+        <div class="container-fluid mt-5 mb-5">
+            <div class="row">
+
+                {% for product in products %}
+                    <div class="col-sm-4 col-md-4 col-lg-3">
+                        {% include 'template_parts/_bestProducts.html.twig' %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        </div>
+            {# <div class="col-lg-4">
+                <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                <h2>Heading</h2>
+                <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+            </div><!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                <h2>Heading</h2>
+                <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
+                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+            </div><!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                <h2>Heading</h2>
+                <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+            </div><!-- /.col-lg-4 --> #}
+        {# </div><!-- /.row --> #}
+        {# </div> #}
+
+
+        <!-- START THE FEATURETTES -->
+
+        <hr class="featurette-divider">
+
+        <div class="container text-light mt-5 mb-5">
+
+        <div class="row featurette">
+            <div class="col-md-7 m-auto">
+                <h2>Une équipe de professionnels <span class="text-warning">au grand savoir-faire.</span></h2>
+                <p><i>Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</i></p>
+            </div>
+            <div class="col-md-5">
+                    <img src="{{ asset('assets/img/usine-2.jpg') }}" class="img-fluid rounded-lg border border-warning" alt="Un savoir faire français !">
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette mt-5 mb-5">
+            <div class="col-md-7 order-md-2 m-auto">
+                <h2>Retrouvez nos produits dans notre<span class="text-warning"> magasin d'usine</span> <span class="text-warning"> et dans les meilleurs boutiques à travers le monde.</span></h2>
+                <p><i>Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</i></p>
+            </div>
+            <div class="col-md-5 order-md-1">
+           
+                    <img src="{{ asset('assets/img/boutique-2.jpg') }}" class="img-fluid rounded-lg border border-warning" alt="Une boutique ouverte toute l'année">
+            </div>
+        </div>
+
+        </div>
+        <!-- /END THE FEATURETTES -->
+
+{% endblock %}
+
+
+

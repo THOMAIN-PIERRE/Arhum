@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Qui sommes-nous !{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid col-md-10 mt-3 mb-5">
+
+<h1 class="text-warning text-center"><i class="fas fa-chess-rook mr-2"></i> BIENVENUE AU DOMAINE RHUMA SUG <i class="fas fa-chess-rook ml-2"></i></h1>
+<div class="container-fluid col-md-10 mt-4 mb-5 bg-success p-3 rounded-lg">
+    <img src="{{ asset('assets/img/domaine-1.jpg') }}" class="img-fluid" alt="...">
+</div>
+
+
+    <div>
+        {% include 'template_parts/_ecoCert.html.twig' %}
+    </div>
+
+
+{# {% for card in abouts %}
+<div class="container col-md-10 mt-3 mb-2">
+    <div class="row">
+    <div class="col">
+    <div class="col-md-4">
+        <div class="card bg-success" data-aos="zoom-in">
+            <img src="{{ card.picture }}" class="card-img-top img-fluid p-3" alt="..." height="300rem">
+            <div class="card-body">
+                <h5 class="card-title text-light"><b>{{ card.title }}</b></h5>
+                <p class="card-text text-light">{{ card.text }}</p>
+            </div>
+        </div>
+    </div>   
+    </div>
+    </div>
+</div>
+{% endfor %} #}
+
+
+<div class="container-fluid col-md-10 mt-3 pt-3">
+    {# <h3 class="text-center text-light mb-4"><b>TOUS NOS PRODUITS SONT ISSUS D'UNE AGRICULTURE ECO-RESPONSABLE</b></h3> #}
+    <div class="col-md-12">
+    <div class="row d-flex justify-content-around">
+        {% for card in abouts %}
+    {# <div class="col-md-5 text-light mb-4 bg-success rounded-lg" data-aos="zoom-in"> #}
+    <div class="col-md-5 text-light mb-4 bg-success rounded-lg">
+        <img src="/uploads/aboutPicture/{{ card.picture }}" class="card-img-top img-fluid p-3" alt="..." height="250rem">
+        <div class="card-body">
+            <h5 class="card-title text-light"><b>{{ card.title }}</b></h5>
+            <p class="card-text text-left">{{ card.text | raw }}</p>
+        </div>
+    </div>
+        {% endfor %}
+    </div>
+    </div>
+</div>
+   
+
+    <div class="mt-3 mb-3">
+        {% include 'template_parts/_statBlock.html.twig' %}
+    </div>
+
+</div>
+
+{% endblock %} 

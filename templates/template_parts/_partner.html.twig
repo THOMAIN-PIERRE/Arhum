@@ -1,0 +1,52 @@
+<style>
+.slick-slide img {
+    max-height: 110px;
+    display:block;
+}
+.slick-slide {
+    display: none; 
+    float: left; 
+    height: 100%; 
+    min-height: 1px;
+}
+.slick-initialized .slick-slide {
+    display: block;
+}
+</style>
+
+<article id="partner carousel" class="container-fluid mb-5" style="background-color: white;">
+    <div class="row">
+      <div class="col-12">
+        <div class="customer-logos slider">
+	  	{% for partners in partners %}
+        <div class="mr-5 my-4"><img src="/uploads/partners/{{ partners.logo }}"></div>
+		{# <div></div> #}
+		{% endfor %}
+
+
+
+        {# <div class="slide mr-5"><img src="https://medias.fashionnetwork.com/image/upload/v1/medias/2d7a68d1a15b74ac6f8b3dd5f0d177803011355.jpg"></div>
+		<div></div>
+        <div class="slide mr-5"><img src="https://medias.fashionnetwork.com/image/upload/v1/medias/2d7a68d1a15b74ac6f8b3dd5f0d177803011355.jpg"></div>
+		<div></div>
+        <div class="slide mr-5"><img src="https://logos-marques.com/wp-content/uploads/2020/06/Giorgio-Armani-logo.jpg"></div>
+		<div></div>
+        <div class="slide mr-5"><img src="https://cdn.1min30.com/wp-content/uploads/2017/08/Chanel-logo-1.jpg"></div>
+		<div></div>
+        <div class="slide mr-5"><img src="https://logos-marques.com/wp-content/uploads/2020/06/Herm%C3%A8s-logo.jpg"></div>
+		<div></div>
+        <div class="slide mr-5"><img src="https://www.lepage.fr/img/cms/Logo%20marque/DIOR.png"></div>
+		<div></div>
+        <div class="slide mr-5"><img src="https://cdn.1min30.com/wp-content/uploads/2017/06/Logo-Prada.jpg"></div>
+		<div></div>
+        <div class="slide mr-5"><img src="https://i.pinimg.com/originals/b6/37/3a/b6373a222c6013fd2d085204bf103859.jpg"></div>
+		<div></div>
+        <div class="slide mr-5"><img src="https://i.pinimg.com/originals/c7/1a/11/c71a11442b40e62b41bb43b479be30ea.jpg"></div>
+		<div></div> #}
+
+
+        </div>
+      </div>
+    </div>    
+</article>
+

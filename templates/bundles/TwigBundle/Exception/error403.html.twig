@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Accès interdit{% endblock %}
+
+{% block body %}
+
+<div class="container alert alert-warning rounded-lg my-5 p-4">
+<div class="row">
+<div class="col-md-4">
+    <img src="{{ asset('assets/img/img-error-403.jpg') }}" alt="Error 403" class="img-fluid rounded-lg">
+</div>
+<div class="col-md-8 m-auto text-center text-dark">
+    <h1><b>ACCES INTERDIT !</b></h1>
+    <p>Code de l'erreur : <b>{{ status_code }}</b></p>
+    <p>Message de l'erreur : <b>{{ status_text }}</b></p>
+    <p class="mt-5"><i>Vous n'avez pas la permission de voir cette page !</i></p>
+    <div>
+    <a href="{{path('home')}}" class="btn btn-primary mr-5"><b>Retour à l'accueil</b></a>
+    <a href="{{path('products')}}" class="btn btn-warning text-dark"><b>Boutique en ligne</b></a>
+    </div>
+</div>
+</div>
+</div>
+
+{% endblock %}

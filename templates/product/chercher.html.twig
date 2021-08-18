@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche rapide d'un produit{% endblock %}
+
+{% block body %}
+    {# <div class="container col-10 my-5">
+    <h1 class="bg-warning text-dark text-center p-2 rounded-lg font-weight-bold">PRODUIT(S) EN LIEN AVEC VOTRE RECHERCHE</h1>
+        {% if product > 0 %}
+                {% for product in product %}
+            <div class="row d-flex justify-content-between p-1"  >
+
+                    <div class="col-12 col-md-6 col-lg-3"  style="margin-bottom:10px" data-aos="zoom-in" >
+                        <div class="card-body  btn btn-dark">
+                            <div class="badge badge-light" >
+                                <img style="width: 100%;" src="/uploads/products/{{ product.illustration }}" alt="">
+                            </div>
+                            <div class="col-12 btn btn-secondary text-warning mt-2" style="font-size: 1.5rem;"><b>{{ product.name | upper }}</b></div>
+                            {% if app.user %}
+                                <p class="btn btn-success col-6 mt-3" style="cursor: default; font-size: 1.3rem;"><i class="fas fa-coins text-light mr-2"></i> {{ ((product.price)/100)  | number_format(2, ',', '.')}} €</p>
+                            {% endif %}
+                            <a class="btn btn-primary col-12 mt-2" href="{{ path('detail',{'id':product.id}) }}"><i class="fas fa-eye mr-1"></i> PLUS D'INFOS ...</a>
+                            </div>
+                            
+                            
+                                
+                        </div>
+                    </div>
+
+                {% endfor %}
+            </div>
+        {% else %}
+        <div class="container mt-5 mb-5">
+        <div class="col-md-12">
+            <div class="alert alert-warning text-center mt-5">
+                    <p class="mt-5 text-dark" style="font-size: 2rem;">Nous n'avons trouvé aucun produit en lien avec votre recherche !</p>
+            <div class="mt-5 mb-5">
+                <a href="" class="badge badge-success p-3 mr-5" style="font-size: 1rem;">Accueil du site</a>
+                <a href="" class="badge badge-warning p-3" style="font-size: 1rem;">Aller voir la boutique</a>
+            </div>
+            </div>
+        </div>
+        </div>
+        {% endif %}
+    </div> #}
+
+
+<div class="container-fluid col-10 mb-5">
+        <h1 class="bg-warning text-dark text-center p-2 rounded-lg font-weight-bold border border-dark mb-3">RESULTAT DE VOTRE RECHERCHE ~ <span class="btn btn-secondary border border-dark text-light" style="font-size: 1.5rem;"><i>" {{ string }} "</i></span></h1>
+        {% if products %}
+            <div class="col-md-12 alert alert-warning">
+                <div class="row d-flex justify-content-around">
+            {% for product in products %}
+                    <div class="col-md-3">
+                        <div class="card-body btn btn-dark mt-3 mb-3" style="box-shadow: 15px 15px 20px black;">
+                            <div class="badge badge-light">
+                                <img style="width: 100%;" src="/uploads/products/{{ product.illustration }}" alt="Photo {{ product.name | upper }}">
+                            </div>
+                            <div class="col-12 btn btn-secondary border border-light font-weight-bold mt-2" style="font-size: 1.4rem;">{{ product.name | upper }}</div>
+                                <p class="btn btn-success col-6 mt-3" style="cursor: default; font-size: 1.5rem;"><i class="fas fa-coins text-light mr-2"></i> {{ ((product.price)/100)  | number_format(2, ',', '.')}} €</p>
+                            <a class="btn btn-primary border border-light col-12 mt-2" href="{{ path('detail', {'id':product.id}) }}"><i class="fas fa-eye mr-1"></i> PLUS D'INFOS ...</a>
+                            </div> 
+                        </div>
+            {# <div class="row d-flex justify-content-between p-1"  >
+                {% for product in products %}
+
+                    <div class="col-12 col-md-6 col-lg-3"  style="margin-bottom:10px" data-aos="zoom-in" >
+                        <div class="card-body  btn btn-dark">
+                            <div class="badge badge-light">
+                                <img style="width: 100%;" src="/uploads/products/{{ product.illustration }}" alt="Photo {{ product.name | upper }}">
+                            </div>
+                            <div class="col-12 btn btn-secondary border border-light mt-2">{{ product.name | upper }}</div>
+                                <p class="btn btn-success col-6 mt-3" style="cursor: default; font-size: 1.5rem;"><i class="fas fa-coins text-light mr-2"></i> {{ ((product.price)/100)  | number_format(2, ',', '.')}} €</p>
+                            <a class="btn btn-primary border border-light col-12 mt-2" href="{{ path('detail', {'id':product.id}) }}"><i class="fas fa-eye mr-1"></i> PLUS D'INFOS ...</a>
+                            </div> 
+                        </div>
+                    </div>
+                {% endfor %}
+            </div> #}
+                {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+        <div class="container mt-4 mb-4">
+        <div class="col-md-12">
+            <div class="alert alert-danger border border-dark text-center">
+                <p class="mt-5 text-danger" style="font-size: 2rem;"><i class="fas fa-times-circle text-danger"></i> {{ message }}</p>
+            <div class="mt-5 mb-5">
+                <a href="{{ path('home') }}" class="badge badge-success border border-dark p-3 mr-5" style="font-size: 1rem;">RETOUR ACCUEIL</a>
+                <a href="{{ path('products') }}" class="badge badge-warning border border-dark p-3" style="font-size: 1rem;">RETOUR BOUTIQUE</a>
+            </div>
+            </div>
+        </div>
+        </div>
+        {% endif %}
+    </div>
+
+{% endblock %} 

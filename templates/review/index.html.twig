@@ -1,0 +1,304 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes commandes - Rhuma Sug{% endblock %}
+
+{% block body %}
+
+
+{% if app.user.publicName is same as ('') %}
+    <div class="container alert alert-secondary rounded-lg mt-5 mb-5">
+        <h2 class="bg-secondary text-light text-center p-2 rounded-lg col-md-6 m-auto"><strong>COMMENTER UN ACHAT</strong></h2>
+        <h2 class="container col-10 bg-secondary text-light mt-4 mb-5 text-center p-5 rounded-lg"><i>Pour commenter vos achats, vous devez vous créer un nom public au niveau de votre profil client</i></h2>
+        <p class="mb-4 text-center"><a href="{{ path('account_profile') }}" class="bg-warning text-dark m-auto rounded-lg border border-dark mb-5 p-3" style="font-weight: bold; text-decoration: none;">CREER UN PSEUDO</a></p>
+    </div> 
+
+{% else %}
+
+
+<div class="container-fluid col-md-10">
+<div class="alert alert-dark mt-5 mb-4">
+
+{# {% for message in app.flashes%}
+		<div class="container col-md-12">
+				<div class="alert alert-success">{{ message }}</div>
+		</div>
+{% endfor %} #}
+
+{% for review in commentaires %}
+{# {% set comment = orderDetails.reviews.commentFromAuthor(app.user) %} #}
+{# {% if commentaires > 0 %} #}
+{% if commentaires is same as ('') %}
+
+
+<h1 class="alert-heading mb-3 text-dark"><i class="fa fa-comment text-dark" aria-hidden="true"></i> {{ app.user.publicName }}, votre avis nous intéresse !</h1>
+{{ form_start(form) }}
+
+<div class="row mt-4">
+<div class="col-md-4">
+
+    {# <h6 class="text-center mb-5" style="font-size: 1.5rem;"><b>PRODUIT</b></h6>   #}
+    <div class="text-center col-md-12 alert alert-warning border border-dark p-4 mt-5">
+        <h6 class="text-center mb-3" style="font-size: 1.5rem;"><b><u>PRODUIT</u></b></h6>  
+        <p class="text-dark m-auto" style="font-size: 1.5rem;"><b>{{ orderDetails.product }}</b></p>
+        <p class="text-dark m-auto" style="font-size: 1.5rem;"><b>{{ (orderDetails.total / 100)|number_format(2, ',', '.') }} €</b></p>
+    </div>
+    
+    {# <td class="text-dark text-center align-middle"><b>{{ (orderDetails.price / 100)|number_format(2, ',', '.') }} €</b></td> #}
+    {# <span class="text-dark mr-3">x {{ orderDetails.quantity }}</span> #}
+
+</div>
+<div class="col-md-6">
+{{ form_row(form.comment) }}
+{{ form_row(form.submit) }}
+</div>
+<div class="col-md-2">
+{{ form_row(form.note) }}
+</div>
+
+</div>
+{{ form_end(form) }}
+</div>
+
+
+{{ dump() }}
+
+
+
+
+{# {% endif %}
+{% endfor %} #}
+
+{# <div class="container col-8 bg-secondary float-left border border-dark text-light mt-4 mb-4">
+        <h2 class="mt-2" style="color:white; text-shadow: 4px 6px 8px black;"><b><img src="/uploads/avatar/{{ app.user.avatar }}" style="max-width:45px; border-radius:50%"> Votre avis :<h4 class="float-right mt-2">{{ comment.createdAt | date ('d/m/Y') }} à {{ comment.createdAt | date ('H:i') }}</h4</b></h2>
+        <hr style="border: none; border-bottom: 2px solid #fff;">
+        <blackquote><h4 class="mt-2 mb-4">
+            <i>"{{ review.comment | raw }}"</i></h4>
+        </blackquote>
+        <h4 class="py-2" style="color:white; text-shadow: 4px 6px 8px black;"><strong>VOTRE NOTE :</strong> {% include 'template_parts/_rating.html.twig' with {'rating': review.note} %}</h4>
+        </div>
+{% endfor %} #}
+
+{% else %}
+
+
+<h1 class="alert-heading mb-3 text-dark"><i class="fa fa-comment text-dark" aria-hidden="true"></i> Votre avis sur ce produit !</h1>
+<div class="dropdown-divider"></div>
+<div class="row alert alert-warning mt-2 m-auto p-3">
+{# <div class="row mt-5"> #}
+<div class="col-md-4">
+    <div class="text-center col-md-12 p-4">
+        {# <h1 class="col-12 text-light m-auto bg-secondary rounded-lg p-2" style="font-size: 1rem;">COMMANDE  N° <b class="text-warning">{{ orderDetails.myOrder.reference }}</b></h1> #}
+        <div class="row bg-secondary rounded-lg p-4">
+            <div class="col-md-4 mt-5 m-auto">
+                <img src="/uploads/products/{{ orderDetails.picture }}" alt="Photo" class="img-fluid border border-dark text-light">
+            </div>
+            <div class="col-md-7 mt-5 m-auto">
+                <p class="text-light m-auto" style="font-size: 1.5rem;"><b>{{ orderDetails.product }}</b></p>
+                <p class="text-light m-auto" style="font-size: 1.3rem;"><b>{{ orderDetails.package }} {{ orderDetails.content }} - <span class="badge badge-warning text-dark p-2"><i>{{ orderDetails.scale }}°</i></span></b></p>
+                <div class="row mt-2">
+                    <p class="text-warning m-auto" style="font-size: 1.3rem;"><b><i>x {{ orderDetails.quantity }}</i></b></p>
+                    <p class="text-warning m-auto" style="font-size: 1.3rem;"><b><i>{{ (orderDetails.price / 100)|number_format(2, ',', '.') }} €</i></b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{# <div class="col-md-4">
+    <div class="text-center col-md-12 alert alert-warning border border-dark rounded-lg p-4">
+    <h6 class="text-center mb-3" style="font-size: 1.5rem;"><b><u>PRODUIT</u></b></h6>
+        <p class="text-dark m-auto" style="font-size: 1.5rem;"><b>{{ orderDetails.product }}</b></p>
+        <p class="text-dark m-auto" style="font-size: 1.5rem;"><b>{{ (orderDetails.total / 100)|number_format(2, ',', '.') }} €</b></p>
+    </div>
+</div> #}
+
+<div class="col-md-8">
+    <div class="container col-12 bg-secondary rounded-lg float-left border border-dark text-light mb-4">
+        <h2 class="mt-2" style="color:white; text-shadow: 4px 6px 8px black;">
+        <b>
+        {% if app.user.avatar == null %}
+        <img src="/uploads/avatar/avatar-default.png" class="border border-dark" style="max-width:45px; border-radius:50%"> {{ app.user.publicName }}
+        {% else %}
+        <img src="/uploads/avatar/{{ app.user.avatar }}" class="border border-dark" style="max-width:45px; border-radius:50%"> {{ app.user.publicName }}
+        {% endif%}
+        <h4 class="float-right mt-2">Commenté le {{ comment.createdAt | date ('d/m/Y') }} à {{ comment.createdAt | date ('H:i') }}</h4>
+        </b>
+        </h2>
+        <hr style="border: none; border-bottom: 2px solid #fff;">
+        <blackquote><h4 class="mt-2 mb-4">
+            <i>{{ review.comment | raw }}</i></h4>
+                {# <i>"Voila le commentaire que j'ai fait sur cet article !"</i></h4> #}
+        </blackquote>
+        <h4 class="py-2" style="color:white; text-shadow: 4px 6px 8px black;"><strong>VOTRE NOTE :</strong> {% include 'template_parts/_rating.html.twig' with {'rating': review.note} %}</h4>
+    </div>
+</div>
+
+</div>
+
+
+
+{# {% endif %} #}
+
+ {# <a href="{{path('main')}}" class="btn btn-primary mt-4 mb-3 mr-5 float-xl-none float-right" style="font-size: 1.6em;"><i class="fa fa-reply-all" aria-hidden="true"></i> <b>Retour au fil d'actualité</b></a> #}
+ {# <a href="" class="btn btn-primary mt-4 mb-3 mr-5 float-xl-none float-right" style="font-size: 1.6em;"><i class="fa fa-reply-all" aria-hidden="true"></i> <b>Retour au fil d'actualité</b></a> #}
+
+ 
+{# </article> #}
+{# <hr class="mt-5">
+<hr class="md-5"> #}
+
+
+{% endif %}
+{% endfor %}
+
+
+
+
+<section class="alert alert-warning" id="commentaires">
+
+
+{% if orderDetails.reviews | length > 0 %}
+{# {% if review.status is same as ('Validé') %} #}
+
+    {# {% if orderDetails.reviews.status is same as ("Validé")  %} #}
+<h2 class="mb-3 text-center text-dark mt-5 mb-5"><strong>TOUTES LES EVALUATION DE NOS CLIENTS</strong></h2>
+
+<div class="container col-10 alert bg-primary text-light mb-4">
+    <h1 class="alert-heading text-center">
+        <div class="row align-items-center">
+            <div class="col">
+                <b style="text-shadow: 6px 8px 8px black;">NOTE DE L'ARTICLE</b>
+                
+            </div>
+            <div class="col">
+            <span class="rating mt-2"> 
+                {# {% include 'template_parts/_rating.html.twig' with {'rating' : orderDetails.reviews.AvgRatings} %} #}
+            </span>
+                <br>
+                {# {% for comment in commentaires %} #}
+                <div>
+                    <small>Evaluation sur <strong>{{ orderDetails.reviews | length }}</strong> avis !</small>
+                </div>
+                {# {% endfor %} #}
+            </div>
+        </div>
+    </h1>
+</div>
+
+{% else %}
+    {# <div class="container col-7 bg-danger text-light">
+    <h2 class="mt-5 mb-5 text-center p-5"><i>Ce produit n'a pas encore reçu de commentaire !</i>
+    <br> 
+    </div>  #}
+{% endif %}
+
+
+{% for review in commentaires %}
+{# {% for review in orderDetails.reviews %} #}
+
+<div class="container col-md-12"></div>
+<div class="container col-6 alert bg-success text-light rounded mb-3 py-3 px-3">
+    {% if app.user.avatar == null %}
+        <img src="/uploads/avatar/avatar-default.png" class="border border-dark" style="max-width:45px; border-radius:50%"> 
+        {% else %}
+        <img src="/uploads/avatar/{{ review.user.avatar }}" style="max-width: 45px; border-radius:50%; font-size: 1.2rem; font-weight: bold;" class="mr-2">
+        {% endif%}
+    {# <img src="" style="max-width:45px; border-radius:50%"> #}
+    <i>{{ review.createdAt | date ('d/m/Y') }} à {{ review.createdAt | date ('H:i') }} par <strong><u>{{ review.author }}</u></i></strong>
+    <hr style="border: none; border-bottom: 1px solid #fff;">
+    <blockquote class="mt-3">
+        <h5><i>{{review.comment | raw }}</i></h5>
+    </blockquote>
+    {# <hr style="border: none; border-bottom: 1px solid #fff;"> #}
+    <strong class="mr-2" style="font-size: 1.2em; text-shadow: 6px 6px 4px black;"><i>NOTE :</i></strong>
+    {% set note = review.note %}
+    {% include 'template_parts/_rating.html.twig' with {'note' : review.note} %}
+
+
+{# <img src="{{ comment.utilisateur.avatar }}" style="max-width:45px; border-radius:50%">
+    <i>{{ comment.createdAt | date ('d/m/Y') }} à {{ comment.createdAt | date ('H:i') }} par <strong><u>{{ comment.author }}</u></i></strong>
+    <hr style="border: none; border-bottom: 1px solid #fff;">
+    <blockquote class="mt-3">
+        <h5><i>"{{comment.content}}"</i></h5>
+    </blockquote>
+    <strong style="font-size: 1.5em; text-shadow: 6px 6px 4px black;"><i>NOTE DE L'ARTICLE :</i></strong>
+    {% set rating = comment.rating %}
+    {% include 'template_parts/_rating.html.twig' with {'rating' : comment.rating} %} #}
+
+
+</div>
+
+
+{% else %}
+
+    {# <h2 class="mb-3 text-center"><strong>EVALUATION PAR LES CLIENTS</strong></h2> #}
+{# <div class="container col-7 bg-danger rounded-lg text-light">
+    <h2 class="mt-5 mb-5 text-center p-5"><i>Ce produit n'a pas encore été commenté.</i>
+    <br> 
+</div> #}
+
+<h1 class="alert-heading mb-3 text-dark"><i class="fa fa-comment text-dark" aria-hidden="true"></i> {{ app.user.publicName }}, votre avis nous intéresse !</h1>
+<div class="dropdown-divider"></div>
+{{ form_start(form) }}
+
+<div class="row mt-5">
+<div class="col-md-4 m-auto">
+
+    {# <h6 class="text-center mb-5" style="font-size: 1.5rem;"><b>PRODUIT</b></h6>   #}
+    <div class="text-center col-md-12 p-4">
+        {# <h6 class="text-center mb-3" style="font-size: 1.5rem;"><b><u>PRODUIT</u></b></h6>  #}
+        <h1 class="col-12 text-light m-auto bg-success rounded-lg p-2" style="font-size: 1rem;">COMMANDE  N° <b class="text-warning">{{ orderDetails.myOrder.reference }}</b></h1>
+        <div class="row bg-success rounded-lg p-4 mt-2">
+            <div class="col-md-5 mt-5 m-auto">
+                <img src="/uploads/products/{{ orderDetails.picture }}" alt="Photo" class="img-fluid border border-dark text-light">
+            </div>
+            <div class="col-md-7 mt-5 m-auto">
+                <p class="text-light m-auto" style="font-size: 1.5rem;"><b>{{ orderDetails.product }}</b></p>
+                <p class="text-light m-auto" style="font-size: 1.3rem;"><b>{{ orderDetails.package }} {{ orderDetails.content }} - <span class="badge badge-warning text-dark p-2"><i>{{ orderDetails.scale }}°</i></span></b></p>
+                <div class="row mt-2">
+                    <p class="text-warning m-auto" style="font-size: 1.3rem;"><b><i>x {{ orderDetails.quantity }}</i></b></p>
+                    <p class="text-warning m-auto" style="font-size: 1.3rem;"><b><i>{{ (orderDetails.price / 100)|number_format(2, ',', '.') }} €</i></b></p>
+                </div>
+                {# <p class="text-light m-auto" style="font-size: 1.5rem;"><b>{{ (orderDetails.total / 100)|number_format(2, ',', '.') }} €</b></p> #}
+            </div>
+        </div>
+    
+    {# <td class="text-dark text-center align-middle"><b>{{ (orderDetails.price / 100)|number_format(2, ',', '.') }} €</b></td> #}
+    {# <span class="text-dark mr-3">x {{ orderDetails.quantity }}</span> #}
+
+</div>
+</div>
+<div class="col-md-6">
+{{ form_row(form.comment) }}
+{{ form_row(form.submit) }}
+</div>
+<div class="col-md-2">
+{{ form_row(form.note) }}
+</div>
+
+</div>
+{{ form_end(form) }}
+</div>
+
+
+
+{% endfor %}
+
+<div class="container-fluid">
+    <div class="col-md-12 text-left mt-4 mb-5">
+        <div class="dropdown-divider"></div>
+        <a href="{{ path('account_order') }}" class="text-light text-left" style="font-size: 1.2rem; text-decoration: none;"><i class="fas fa-arrow-circle-left"></i> RETOUR BOUTIQUE</b></a>
+    <div>
+</div>
+</div>
+</div>
+</section>
+
+</div>
+</div>
+
+{# {% endif %} #}
+{% endif %}
+
+{% endblock %}
+
+

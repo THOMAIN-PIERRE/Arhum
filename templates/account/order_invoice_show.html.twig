@@ -1,0 +1,126 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Ma commande  - Rhuma Sug{% endblock %}
+
+{% block body %}
+
+<h1 class="text-center mb-4"><u>FACTURE</u></h1>
+<div class="container bg-light text-dark border border-dark mb-5 p-5">
+
+{# <div class="btn-group float-right">
+    <button type="button" class="btn btn-warning"><b>FACTURE</b></button>
+    <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">FACTURE</span>
+    </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="">VISUALISER</a>
+        </div>
+    </div> #}
+
+{# <a href=""><p class="float-right badge badge-primary p-3">Facture associée à cette commande</p></a> #}
+<h2 class="text-dark"> RHUMA SUG</h2> 
+<h5>DETAILS DE VOTRE COMMANDE <small>du {{ order.createdAt | date('d/m/Y') }}</small></b></h5>
+{# <h2 class="text-warning mt-5"><img src="{{ asset('assets/img/logo3.png') }}" alt="logo " class="img-fluid"  style="width: 100px; height: 70px;"> <b class="ml-3">FACTURE</b></h2> #}
+<hr>
+
+
+<div class="col-md-5 mt-4 mb-4 border border-dark rounded-lg p-3">
+	<p style="font-weight: bold; font-size: 1.8rem;"><b>PAYEE</b></p>
+    <p>****************************</p>
+	{# <p>Référence de paiement : <b>{{ order.stripeSessionId }}</b></p> #}
+	<p>N° de Facture : <b>{{ order.stripeSessionId }}</b></p>
+	<p>Montant réglé : <b>{{ ((order.carrierPrice + order.getTotal) / 100)|number_format(2, ',', '.') }} €</b></p>                   
+</div>
+  
+
+    <div class="col">
+
+				<div class="col-md-4 mt-5">
+					<p class="text-dark" style="font-weight: bold; font-size: 1.5rem; color: grey;">De : "Rhuma Sug"</p>
+					<p>Rhuma Sug</p>
+                    <p>01 55 28 50 25</p>
+                    <p>10 Avenue des Champs Elysées</p>
+					<p>75001 Paris</p>
+					<p>FR</p>
+					<p>Email: boutique.rhumasug@gmail.com</p>
+				</div>
+
+				<div class="col-md-4 mt-5">
+					<p class="text-dark" style="font-weight: bold; font-size: 1.5rem; color: grey;">A : {{ app.user.firstname }} {{ app.user.lastname }}</p>
+					<p>{{ order.delivery | raw }}</p>
+					<p>Email: {{ app.user.email }}</p>
+
+			    </div>
+
+			    <div class="col-md-4 mt-5 text-left">
+					<p class="text-dark" style="font-weight: bold; font-size: 1.5rem; color: grey;">Details de la commande</p>
+					<p class="mt-4"><strong>Référence commande :</strong> {{ order.reference }}</p>
+                    <p><strong>Date :</strong> {{ order.createdAt|date('d/m/Y') }}</p>
+					{# <p><strong>Total amount : </strong> {{ ((order.carrierPrice + order.getTotal) / 100)|number_format(2, ',', '.') }} €</p> #}
+                    <p><strong>Transporteur :</strong> {{ order.carriername }}</p>
+                    <p><strong>Statut : </strong>
+                    {% if order.state == 1 %}
+                        Paiement accepté
+                    {% elseif order.state == 2 %}
+                        Préparation en cours
+                    {% elseif order.state == 3 %}
+                        Livraison en cours
+                    {% endif %}
+                    </p>
+                    {# <p><strong>Total amount : </strong> {{ ((order.carrierPrice + order.getTotal) / 100)|number_format(2, ',', '.') }} €</p> #}
+					{# <p>Account Name: Flatter</p> #}
+			    </div>
+
+			</div>
+    {# <strong>Commande passée le :</strong> {{ order.createdAt|date('d/m/Y') }}<br/>
+    <p><strong>Référence de ma commande :</strong> <small>{{ order.reference }}</small></p> #}
+    {# <strong>Transporteur choisi :</strong> {{ order.carriername }}
+    <strong>Adresse de livraison :</strong>  #}
+    {# <hr> #}
+    {# <strong>Détails:</strong> #}
+
+    <table class="table mt-4 text-light">
+        <thead>
+        <tr>
+            <th scope="col" class="text-center align-middle text-dark">PRODUIT</th>
+            <th scope="col" class="text-center align-middle text-dark">QUANTITE</th>
+            <th scope="col" class="text-center align-middle text-dark">PRIX UNITAIRE</th>
+            <th scope="col" class="text-center align-middle text-dark">TOTAL</th>
+            {# <th scope="col" class="text-center align-middle text-dark">COMMENTAIRE</th> #}
+        </tr>
+        </thead>
+        <tbody>
+        {% for product in order.orderDetails %}
+        <tr class="alert alert-warning mb-2">
+            <td class="text-dark text-center align-middle"><b>{{ product.product }}</b></td>
+            <td class="text-dark text-center align-middle"><b>x{{ product.quantity }}</b></td>
+            <td class="text-dark text-center align-middle"><b>{{ (product.price / 100)|number_format(2, ',', '.') }} €</b></td>
+            <td class="text-dark text-center align-middle"><b>{{ (product.total / 100)|number_format(2, ',', '.') }} €</b></td>
+            {# <td class="text-dark text-center align-middle"><a class="btn btn-secondary text-light" style="box-shadow: 5px 10px 15px black;">Ecrire un commentaire sur le produit</a></td> #}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="text-right mt-4mb-5">
+        <hr>
+        <strong>Sous-total :</strong> <b class="text-dark">{{ (order.getTotal / 100)|number_format(2, ',', '.') }} €</b><br/>
+        <strong>Livraison :</strong> <b class="text-dark">{{ (order.carrierprice / 100)|number_format(2, ',', '.') }} €</b><br/>
+        <p>***********************</p>
+        <strong>Total : </strong> <b class="text-dark mb-5">{{ ((order.carrierPrice + order.getTotal) / 100)|number_format(2, ',', '.') }} €</b>
+    </div>
+    {# <hr class="mt-5"> #}
+    {# <div class="text-left">
+        <hr class="mt-5 mb-3"></hr>
+        <button class="btn btn-success btn-md pl-3 pr-3" id="invoice-print"><i class="fa fa-print"></i> IMPRIMER LA FACTURE</button>
+    </div> #}
+    {# <a href="{{ path('account_order') }}"><b class="text-left text-dark"><img src="{{ asset('assets/img/back-arrow.png') }}" alt="retour"> Retour</b></a> #}
+</div>
+{# <div class="container">
+    <div class="cmt-5 mb-5">
+        <div class="dropdown-divider"></div>
+        <a href="{{ path('account_order_show', {'reference' : order.reference }) }}" class="text-light text-left" style="font-size: 1.2rem; text-decoration: none;"><i class="fas fa-arrow-circle-left"></i> RETOUR</b></a>
+    </div>
+</div> #}
+
+{% endblock %}

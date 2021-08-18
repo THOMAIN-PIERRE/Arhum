@@ -1,0 +1,132 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+	<a class="navbar-brand" href="{{ path('home') }}"><img src="{{ asset('assets/img/logo3.png') }}" alt="logo société" width="90px" height="50px"></a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			{# {% if app.user %}
+			<li class="nav-item"><a class="nav-link text-warning" href="">Bonjour: {{ app.user.prenom | upper }}</a></li>
+			{% endif %} #}
+			{# <li class="nav-item ">
+				<a class="nav-link active" href="">HOME PAGE</a>
+			</li> #}
+			<li class="nav-item mr-3">
+				<a class="nav-link text-light" href="{{ path('nous') }}" style="font-size: 1.2rem;"><b>A PROPOS</b></a>
+			</li>
+			<li class="nav-item mr-3">
+				<a href="{{ path('products') }}" class="nav-link text-warning" style="font-size: 1.2rem;"><b>BOUTIQUE</b></a>
+			</li>
+			<li class="nav-item mr-3">
+				<a class="nav-link text-light" href="{{ path('recettes') }}" style="font-size: 1.2rem;"><b>RECETTES</b></a>
+			</li>
+			{% if app.user %}
+			<li class="nav-item mr-3">
+				<a class="nav-link text-light" href="{{ path('contact') }}" style="font-size: 1.2rem;"><b>CONTACT</b></a>
+			</li>
+			{% endif %}
+
+			{% if app.user %}
+			
+			<li class="nav-item dropdown">
+
+				<li class="dropdown"><a href="#" class="dropdown-toggle text-warning" data-toggle="dropdown" style="text-decoration: none;">{% if app.user.avatar == null or app.user.avatar == "e29d5ce22434c6895e856fd36360d66b.png" %}<i class="fas fa-user fa-2x text-light"></i> {{ app.user.firstname | upper }} {% else %} <img src="/uploads/avatar/{{ app.user.avatar }}" alt="Avatar" class="rounded-circle" style="max-width:45px; border: 3px solid orange;"> <span class="text-warning">{{ app.user.firstname | upper }}</span> {% endif %}
+                                        <b class="caret"></b></a>
+                                        <ul class="dropdown-menu bg-secondary border border-light">
+                                            <li>
+                                                <div class="navbar-content" style="width:320px; padding: 15px; padding-bottom:0px;">
+                                                    <div class="row">
+                                                        <div class="col-md-5">
+															{% if app.user.avatar == null or app.user.avatar == "e29d5ce22434c6895e856fd36360d66b.png" %}
+															<img src= "/uploads/avatar/avatar-default.png" class="avatar img-thumbnail"> 
+															{% else %}
+															<img src= "/uploads/avatar/{{ app.user.avatar }}" alt="Avatar de {{ app.user.firstname }} {{ app.user.lastname }}" class="avatar img-thumbnail">
+															{% endif %}
+                                                            <p class="text-center small">
+                                                                {# <a href="{{ path('client') }}" class="text-center text-light" style="text-decoration: none;">Modifier</a></p> #}
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                            <span class="text-light"><b>{{ app.user.firstname | capitalize }} {{ app.user.lastname | upper }}</b></span>
+                                                            <span class="small text-light">{{ app.user.email }}</span>
+															<span class="small text-light">{% if app.user.gender == 0 %} Cliente depuis {% else %} Client depuis {% endif %}<b class="text-warning">{{ app.user.createdAt | date ('Y') }}</b></span>
+															<hr style="border: 1px solid white;">
+															{% if is_granted('ROLE_ADMIN') %}
+																<div class="float-left mr-2">
+																	{# <a href="/admin"><b class="badge badge-primary p-3"><img src="{{ asset('assets/img/access-admin.png') }}" alt="Accès à l'administation"> Administration du site</b></a> #}
+																	<a href="/admin" target="_blank"><b class="badge badge-warning border border-light text-dark text-center p-2">ADMINISTRATION</b></a>
+																</div>
+															{% endif %}
+                                                            {# <a href="{{ path('client') }}" class="btn btn-primary btn-sm"><b>VOIR PROFIL</b></a> #}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="navbar-footer">
+                                                    <div class="navbar-footer-content">
+													{# <div class="dropdown-divider text-dark"></div> #}
+													<hr style="border: 1px solid white;">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <a href="{{ path('account') }}" class="btn btn-success btn-sm border border-light ml-3 mb-2 p-2"><b>MON COMPTE</b></a>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <a href="{{ path('app_logout') }}" class="btn btn-danger btn-sm border border-light pull-right mr-3 mb-2 p-2"><b>DECONNEXION</b></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+
+
+
+
+
+
+
+				{# <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<i class="fas fa-user"></i> {{ app.user.prenom | upper }}
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<a class="dropdown-item" href="{{ path('mesCommandes') }}">Mes commandes</a>
+				<div class="dropdown-divider"></div>
+					<a class="dropdown-item " href="{{ path('client') }}">Info Personnelles</a>
+				<div class="dropdown-divider"></div>
+				  	<a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
+				</div> #}
+			</li>
+			{% else %}
+			<li class="nav-item ">
+				<a class="nav-link  text-light" href="{{ path('app_login') }}"><i class="fas fa-user" style="font-size: 1.5rem;"></i></a>
+			</li>
+			{% endif %}
+		</ul>
+
+		<ul class="nav navbar-nav navbar-right">
+			{% if app.user %}
+			<li class="nav-item ">
+				{# <a id="number-cart" class="nav-link  text-light mr-5" title="Panier" href="{{ path('cart') }}"><span class="number-cart">{{ app.session.get('nbP') }}</span><i class="fas fa-shopping-cart fa-2x"></i></a> #}
+				<a id="number-cart" class="nav-link text-light rounded-lg mr-4" title="Panier" href="{{ path('cart') }}" style="box-shadow: 0px 0px 15px orange;"><i class="fas fa-shopping-cart fa-2x"></i></a>
+				{# <a id="number-cart" class="nav-link  text-light" title="Panier" href="{{ path('panier') }}"><span class="number-cart">{{ app.session.get('nbP') }}</span><img id="panier" src="assets/img/panier.png" alt="" width="30px" height="30px"></a> #}
+                {# {{dump(app.session)}} #}
+			</li>
+			{# <li class="nav-item ">
+				<a id="number-cart" class="nav-link text-light rounded-lg mr-5" title="Panier" href="{{ path('account_favorites') }}" style="box-shadow: 0px 0px 20px black;"><i class="fas fa-heart fa-2x"></i></a>
+			</li> #}
+
+			{# <li class="nav-item">
+				<a class="nav-link text-light ml-3 mr-3" title="Déconnexion" href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt fa-2x"></i></a>
+			</li>			 #}
+			{% endif %}
+		</ul>
+		<form class="form-inline" action="{{ path('chercher') }}">
+			<input class="form-control mr-sm-2" type="search" placeholder="Rechercher un produit" aria-label="Search" name="chercher">
+			<button class="btn btn-secondary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+			{# <button class="btn"  type="submit"><img src="assets/img/search.png" alt="" width="30" title="chercher"></button> #}
+		</form>
+	</div>
+</nav>
+{# <div class="dropdown-divider"></div> #}
+
+  

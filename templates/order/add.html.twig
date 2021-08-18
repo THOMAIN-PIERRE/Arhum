@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+
+{% block javascript %}
+    <script src="https://js.stripe.com/v3/"></script>
+{% endblock %}
+
+{% block title %}Paiement de ma commande - Rhuma Sug{% endblock %}
+
+{% block body %}
+    <div class="container-fluid col-md-10 text-light">
+    <h2 class="text-warning">Mon récapitulatif</h2>
+    <p class="text-warning"><i>Vérifiez vos informations avant de payer votre commande.</i></p>
+    <div class="dropdown-divider"></div>
+    <div class="row mt-4 mb-5">
+        <div class="col-md-6">
+              <p><strong class="text-warning">MON ADRESSE DE LIVRAISON</strong></p>
+            <div class="form-check mt-4">
+            <div class="row">
+            <div class="col-md-3">
+            <img src="https://i.ibb.co/gMY7vbf/map.png" alt="" width="150px", height="120px" style="border: 5px solid orange">
+            </div>
+            <div class="col-md-9 m-auto">
+            {{ delivery | raw}}
+            </div>
+            </div>
+            <p class="mt-3 mb-3"><a href="{{ path('order') }}" class="badge badge-success badge-pill p-2">CHANGER L'ADRESSE</a></p>
+            </div>
+            <hr>
+            <strong class="text-warning">MON TRANSPORTEUR</strong><br/>
+             <div class="form-check mt-4">
+             <div class="row">
+             <div class="col-md-3">
+            <img src="/uploads/carrier/{{ carrier.logo }}" alt="{{ carrier.name }}" style="border: 5px solid orange">
+            </div>
+            <div class="col-md-9 m-auto">
+            <p class="text-warning ml-2">{{ carrier.name | upper }}<p>
+            <p class="ml-2"><i>{{ carrier.description | raw }}</i></p>
+            <p class="text-warning ml-2"><i>{{ (carrier.price / 100)  | number_format(2, ',', '.')}} €</i></p>
+            </div>
+            </div>
+            <p class="mt-3 mb-3"><a href="{{ path('order') }}" class="badge badge-success badge-pill p-2">CHANGER LE TRANSPORTEUR</a></p>
+            </div>
+        </div>
+        <div class="col-md-6">
+        <div class="text-center">
+            <b class="text-warning">MA COMMANDE</b><br/>
+        </div>
+        <div class="order-summary">
+             {# {{dump(cart)}} #}
+        {% set total = null %}
+        {% for key, product in cart %}
+        <div class="row {% if key > 0 %} mt-2 {% endif %} alert alert-warning text-dark mt-4">
+            <div class="col-2"> <img src="/uploads/products/{{ product.product.illustration }}" alt="{{ product.product.name }}" height="75px" class="border border-dark"></div>
+            <div class="col-3 my-auto">
+                <b>{{ product.product.name }}</b><br/>
+                {# <small><i>{{ product.product.subtitle }}</i></small> #}
+                {# <div class="col-2 my-auto">{{ (product.product.price / 100)  | number_format(2, ',', '.')}} €</div> #}
+            </div>
+            <div class="col-3 my-auto">
+                <b>{{ product.product.conditioning.container }} {{ product.product.conditioning.volume }}</b><br/>
+            </div>
+            <div class="col-1 my-auto">
+                <b>{{ product.product.characteristic.degree }} °</b><br/>
+            </div>
+            <div class="col-1 my-auto"><b>x {{ product.quantity }}</b></div>
+            <div class="col-2 my-auto"><b>{{ (product.product.price / 100)  | number_format(2, ',', '.')}} €</b></div>
+        </div>
+        {% set total = total + (product.product.price * product.quantity) %}
+        {% endfor %}
+        </div>
+
+        {# {{ dump(carrier) }} #}
+        {# <div class="row dropdown-divider mt-4"></div> #}
+        <div class="row text-warning mt-1"><b>Sous-total : </b> <span class="text-light ml-2"><b> {{ (total / 100) | number_format(2, ',', '.') }} €</b></span></div>
+        <div class="row text-warning mb-3"><b>Livraison : </b> <span class="text-light ml-2"><b> {{ (carrier.price / 100) | number_format(2, ',', '.') }} €</b></span></div>
+        <div class="row text-warning"><b>Total : </b> <span class="text-light ml-2"><b> {{ ((total / 100) + (carrier.price / 100)) | number_format(2, ',', '.') }} €</b></span></div>
+        <hr>
+        <a class="col-6 btn btn-success btn-block mt-5 m-auto" id="checkout-button">PAYER LE MONTANT DE <b>{{ ((total / 100) + (carrier.price / 100)) | number_format(2, ',', '.') }} €</b></a>
+        <div class="dropdown-divider mt-5"></div>
+        {# <a href="{{ path('cart') }}" class="text-left text-dark"><img src="{{ asset('assets/img/back-arrow.png') }}" alt="Mes commandes"> <b> Retours au panier</b></a> #}
+        <a href="{{ path('order') }}" class="text-light text-left" style="font-size: 1.2rem; text-decoration: none;"><i class="fas fa-arrow-circle-left"></i> RETOUR</b></a>
+    </div>
+</div>
+</div>
+</div>
+{% endblock %}
+
+{% block script %}
+
+    <script type="text/javascript">
+    // Create an instance of the Stripe object with your publishable API key
+    {# var stripe = Stripe('pk_test_51IadQaFtHAx6LVRSP0H2fjotaJ8goE7vAB9LyRL9oTmZSgARfTcyJI6bQ4liyXyL7PSKKEEgUAm7qi1mmNbf4YQy00pNOexiyy'); #}
+    {# var stripe = Stripe('pk_test_51IbRaFGSqSKftfeNUwxwktOCiKkpjDzH1V4RvZsILs9LB9WuSr6mKLViat1gViPhR8mIqorN8hN4J15emHyCfkXF00SbKTxVjz'); #}
+    var stripe = Stripe('pk_test_51IfV74C3WNCF4sabbTp3j1mKbTf1AEKkq3oj0Na8U1OsHNfvzDeyaTWRU88Oq5FzAHzylVtc16pDGlRu27NNE6mA00g92uqVTw');
+    var checkoutButton = document.getElementById("checkout-button");
+    checkoutButton.addEventListener("click", function () {
+      fetch("/commande/create-session/{{ reference }}", {
+        method: "POST",
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (session) {
+            if (session.error == 'order') {
+                //Redirection vers l'étape 2 ou je sélectionne mon adresse et mon transporteur car quelque chose c'est mal passé
+                window.location.replace('{{ path('order') }}');
+            }else{
+                // Redirige moi vers le paiement
+                return stripe.redirectToCheckout({ sessionId: session.id });
+            }
+        })
+        .then(function (result) {
+          // If redirectToCheckout fails due to a browser or network
+          // error, you should display the localized error message to your
+          // customer using error.message.
+          if (result.error) {
+            alert(result.error.message);
+          }
+        })
+        .catch(function (error) {
+          console.error("Error:", error);
+        });
+    });
+  </script>
+
+{% endblock %}

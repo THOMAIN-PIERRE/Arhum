@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail du produit{% endblock %}
+
+{% block body %}
+
+
+<div class="container mt-4 mb-5">
+<div class="col-md-12">
+<h1 class="text-center text-warning mb-4">RECETTE - FICHE PRATIQUE</h1>
+<div class="row mt-5 border border-light my-auto">
+    <div class="col-md-6 bg-secondary p-4 text-center">
+        <img src="/uploads/recipes/{{ recette.img }}" alt="Image recette" class="img-fluid mb-5 border border-light">
+        <img src="{{ asset('assets/img/logo3.png') }}" alt="Image recette" class="img-fluid mt-5 border border-light">
+    </div>
+    <div class="col-md-6 text-light">
+        <h3 class="text-warning mt-4 mb-4"><i class="fas fa-cocktail"></i> - {{ recette.title }}</h3>
+        <div class="dropdown-divider"></div>
+        <p class="mt-4">{{ recette. text | raw }}</p>
+    </div>
+</div>
+</div>
+</div>
+
+<div class="container mb-5">
+<div class="col-md-12">
+<h1 class="text-center text-warning"><i class="fas fa-sign-language text-warning"></i> PREPARATION</h1>
+<div class="row">
+<div class="col-md-7 mt-3 border border-light bg-success text-light">
+    {# <div class="row mt-4 d-flex justify-content-center"><img src="{{ asset('assets/img/mortar.png') }}" alt="" width="40px" height="40px" class="mr-2"><h1 style="color: black;"> INGREDIENTS</h1></div> #}
+    <div class="row mt-4 d-flex justify-content-center"><i class="fas fa-lemon text-center fa-2x mr-2"></i><h2> INGREDIENTS</h2></div>
+    <div class="dropdown-divider mt-4"></div>
+        <p class="mt-4 ml-5">{{ recette.ingredients | raw}}</p>
+        {# <p class="mt-4 text-light ml-5"><i class="fas fa-map-pin mr-2"></i> 5 cl de <span style="color: black;"><b>rhum blanc</b></span> ou ambré</p>
+        <li class="mt-4 text-light ml-5">8 feuilles de <span style="color: black;"><b>menthe</b></span></li>
+        <li class="mt-4 text-light ml-5">un 1/2 <span style="color: black;"><b>citron</b></span></li>
+        <li class="mt-4 text-light ml-5">2 cuillères de <span style="color: black;"><b>sucre</b></span> en poudre</li>
+        <li class="mt-4 text-light ml-5">6 cl d'<span style="color: black;"><b>eau gazeuse</b></span></li>
+        <li class="mt-4 text-light ml-5">4 <span style="color: black;"><b>glaçons</b></span> pilés</li>
+        <p class="mt-4 text-light"></p> #}
+</div> 
+<div class="col-md-5 mt-3 border border-light bg-light">
+    {# <div class="row mt-4 d-flex justify-content-center"><i class="fas fa-compass fa-2x mr-2" style="color: black;"></i><h2 style="color: black;"> INDICATIONS</h2></div> #}
+    <div class="row mt-4 d-flex justify-content-center"><i class="fas fa-comment text-success text-center fa-2x mr-2"></i><h2 class="text-success"> INDICATIONS</h2></div>
+    <div class="dropdown-divider mt-4 text-success" style="border-color: green;"></div>
+    <div class="row mt-4 d-flex justify-content-center"><img src="{{ asset('assets/img/level.png') }}" alt="" width="30px" height="30px" class="mr-2"><h4 style="color: black;"> Niveau de difficulté : <b class="text-success">{{ recette.level }}</b></h4></div>
+    <div class="row mt-4 d-flex justify-content-center"><img src="{{ asset('assets/img/hourglass.png') }}" alt="" width="30px" height="30px" class="mr-2"><h4 style="color: black;"> Temps de préparation : <b class="text-success">{{ recette.time }} min</b></h4></div>
+    {# <div class="row mt-4 d-flex justify-content-center"><img src="{{ asset('assets/img/clock.png') }}" alt="" width="30px" height="30px" class="mr-2"><h4 style="color: black;"> Temps total : <b class="text-light">8</b></h4></div> #}
+    <div class="row mt-4 d-flex justify-content-center"><img src="{{ asset('assets/img/pie-chart.png') }}" alt="" width="30px" height="30px" class="mr-2"><h4 style="color: black;"> Portions : <b class="text-success">Pour {{ recette.portions }}</b></h4></div>
+    
+
+</div>   
+
+<div class="container mt-1">
+<div class="dropdown-divider mt-5"></div>
+<a href="{{ path('recettes') }}" class="text-light text-left" style="font-size: 1.2rem; text-decoration: none;"><i class="fas fa-arrow-circle-left"></i> RETOUR AUX RECETTES</b></a>
+</div>  
+
+</div>
+</div>
+</div>
+</div>
+            
+
+
+{% endblock %} 

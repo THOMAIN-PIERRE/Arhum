@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gérer mon profil  - Ma boutique{% endblock %}
+
+{% block stylesheet %}
+    {# <link href={{ asset('assets/css/profileForm.css')}} rel="stylesheet"> #}
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+{# <a href="" class="btn btn-warning text-dark btn-md float-right">Modifier mon informations de profil</a> #}
+
+<h1 class="text-warning">Gérer mon profil<h1>
+{# <a href="{{ path('account_profile') }}">Retour</a> #}
+<div class="dropdown-divider"></div>
+
+{% if notification %}
+	<div class="container col-md-12 mt-5">
+		<div class="alert alert-danger text-center"><i class="fas fa-exclamation-triangle"></i> {{ notification }}</div>
+	</div>
+{% endif %}
+
+
+{# <div class="bg-light p-4"> #}
+    {# {{ form(form) }}
+     #}
+{# </div> #}
+
+<div class="container bg-light rounded-lg my-5 p-4">
+
+{{ form_start(form) }}
+
+{# <div class="col-md-8"></div> #}
+<div class="row">
+    <div class="col-md-4">{{ form_row(form.gender) }}</div>
+    <div class="col-md-4">{{ form_row(form.firstname) }}</div>
+    <div class="col-md-4">{{ form_row(form.lastname) }}</div>
+</div>
+<div class="row mt-3">
+    <div class="col-md-5">{{ form_row(form.email) }}</div>
+    {# <div class="col-md-4">{{ form_row(form.avatar, {attr: {class: 'custom-file-input'}}) }}</div> #}
+    <div class="col-md-4">
+        {{ form_row(form.avatar) }}
+    </div>
+    <div class="col-md-3">
+        <img src="/uploads/avatar/{{ app.user.avatar }}" alt="Avatar de {{ app.user.firstname }}" class="img-fluid border border-dark" width="100" height="120"/>
+    </div>
+    {# <h2>Avatar actuel :</h2>
+    {% for avatar in app.user.avatar %}
+    <div>
+        <img src="{{ asset('/uploads/avatar/'~ app.user.avatar) }}" alt="Avatar" width="100px">
+    </div>
+    {% endfor %} #}
+</div>
+<div class="row">
+    <div class="col-md-3">{{ form_row(form.publicName) }}</div>
+</div>
+<div class="row">
+    <h6 class="col-md-7 p-3">(*) Choisissez votre nom public. C'est ce nom qui vous identifiera auprès des autres clients lorsque vous ajouterez un commentaire à votre article commandé.</h6>
+</div>
+    {# <div class="col-md-12 mb-3">{{ form_row(form.birthday) }}</div> #}
+
+
+{{ form_end(form) }}
+
+</div>
+
+
+{# {{ form_start(form) }}
+<div class="row bg-light p-4">
+    <div class="col-md-12">{{ form_row(form.email) }}</div>
+    <div class="col-md-6">{{ form_row(form.avatar) }}</div>
+    <div class="col-md-6">{{ form_row(form.birthday) }}</div> #}
+    {# <div class="col-md-6">{{ form_row(form.company) }}</div>
+    <div class="col-md-6">{{ form_row(form.address) }}</div>
+    <div class="col-md-6">{{ form_row(form.postal) }}</div>
+    <div class="col-md-6">{{ form_row(form.city) }}</div>
+    <div class="col-md-6">{{ form_row(form.country) }}</div>
+    <div class="col-md-6">{{ form_row(form.phone) }}</div> #}
+{# </div>
+{{ form_end(form) }} #}
+
+
+{# {{ form_start(form) }}
+
+    {{ form_widget(form) }}
+{{ form_end(form) }} #}
+
+
+
+<div class="dropdown-divider"></div>
+
+{# <a href="{{ path('account_profile') }}"><b class="text-left text-dark"><img src="{{ asset('assets/img/back-arrow.png') }}" alt="Mes commandes"> Retour</b></a> #}
+        <div class="container mb-5">
+        {# <div class="dropdown-divider mt-4"></div> #}
+        <a href="{{ path('account_profile') }}" class="text-light text-left" style="font-size: 1.2rem; text-decoration: none;"><i class="fas fa-arrow-circle-left"></i> RETOUR</b></a>
+        </div>
+
+</div>
+</div>
+
+{% endblock %}
+

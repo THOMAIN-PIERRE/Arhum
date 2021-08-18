@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+
+	<div class="container-fluid mt-5 mb-5 p-5 text-center">
+		<div class="col-sm-8 col-md-5 p-4 btn btn-dark text-left">
+			<h1 class="text-warning text-center mt-2 mb-4">CONNEXION</h1>
+			<form method="post">
+
+                {# AuthentificationUtils Tool contain various fonctions like getLastAuthenticationError(), getLastUsername() #}
+				{% if error %}
+					<div class="alert alert-danger alert-dismissible text-center">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<strong><i class="fas fa-exclamation-triangle"></i> Identifiant ou mot de passe incorrect</strong>
+					</div>
+				{% endif %}
+
+                {% if app.user %}
+                    <div class="mb-3">
+                        Vous êtes connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                    </div>
+                {% endif %}
+
+				<div class="form-group">
+					<label for="inputEmail">Email</label>
+					<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
+				</div>
+				<div class="form-group">
+					<label for="inputPassword">Mot de passe</label>
+					<input type="password" name="password" id="inputPassword" class="form-control" required>
+				</div>
+
+                
+				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+				{# Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+				See https://symfony.com/doc/current/security/remember_me.html #}
+
+				<div class="checkbox mb-3">
+					<label>
+						<input type="checkbox" name="_remember_me">Se souvenir de moi
+					</label>
+				</div>
+
+				<button class="btn btn-success mt-2" type="submit">CONNEXION</button>
+				<div class="mt-4 text-center">
+					<a href="{{ path('reset_password') }}"><b class="btn text-warning" style="font-size: 1rem;">MOT DE PASSE OUBLIE ?</b></a>
+					<a href="{{ path('register') }}"><b class="btn text-warning" style="font-size: 1rem;">CREER UN COMPTE ?</b></a>
+				</div>
+			</form>
+		</div>
+	</div>
+
+{% endblock %}

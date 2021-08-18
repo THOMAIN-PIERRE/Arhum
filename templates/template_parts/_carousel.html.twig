@@ -1,0 +1,32 @@
+<div id="myCarousel" class="carousel slide mb-5" data-ride="carousel">
+        <ol class="carousel-indicators">
+            {% for key,carousel in carousels %}
+                <li data-target="#myCarousel" data-slide-to="{{ key }}" {% if key == 0 %}class="active"{% endif %}></li>
+            {% endfor %}
+        </ol>
+        <div class="carousel-inner">
+            {% for key,carousel in carousels %}
+            <div class="carousel-item {% if key == 0 %}active{% endif %}" style="background: url('{{ carousel.illustration }}'); background-size:cover;">
+                <div class="container">
+                    <div class="carousel-caption text-left text-dark bg-light p-3 opacity-4 rounded-lg col-md-5" style="opacity: 0.8;">
+                        <h1>{{ carousel.title }}</h1>
+                        <p>{{ carousel.content }}</p>
+                        <p><a class="btn btn-lg btn-info" href="{{ carousel.btnUrl }}" role="button">{{ carousel.btnTitle }}</a></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+
+

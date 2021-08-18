@@ -1,0 +1,48 @@
+{# {% extends 'base.html.twig' %}
+
+{% block title %}Erreur de paiement - Rhuma Sug{% endblock %}
+
+{% block body %}
+
+<h2>Erreur de paiement</h2>
+<p>
+Bonjour <strong>{{ order.user.firstname }} {{ order.user.lastname }}</strong>, <br/><br/>
+Il semblerait que votre paiement ait échoué pour votre commande n°<strong>{{ order.reference }}</strong>.<br/>
+Une confirmation d'erreur vient de vous être envoyée par mail à l'adresse {{ order.user.email }}
+</p>
+<a href="{{ path('order') }}" class="btn btn-success">Réessayer le paiement</a>
+
+{% endblock %} #}
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur de paiement - Rhuma Sug{% endblock %}
+
+{% block body %}
+
+<div class="container">
+<i class="fas fa-times float-right text-warning fa-3x"></i>
+<h2 class="text-warning mb-3">ECHEC DU PAIEMENT</h2>
+<div class="dropdown-divider mb-4"></div>
+<div class="row mt-5 mb-5 text-center">
+    <div class="col-md-3 border-right m-auto p-5">
+        <i class="fas fa-exclamation-circle text-warning fa-8x"></i>
+    </div>
+    <div class="col-md-9">
+        <p class="text-light">Bonjour <strong class="text-warning">{{ order.user.firstname }} {{ order.user.lastname }}</strong>, </p>
+        <p class="text-light">Il semblerait que votre paiement ait échoué pour votre commande n°<strong class="text-warning">{{ order.reference }}</strong>.</p>
+        <p class="text-light mb-5">Une confirmation d'erreur vient de vous être envoyée par mail à l'adresse <span class="text-warning"><b><i>" {{ order.user.email }} "</i></b></span></p>
+        {# Ce bouton me ramène vers la page commande ou je choisi mon adresse de livraison et mon transporteur. Je peux y vérifier le contenu de mon panier (et le modifier si je le souhaite) ou revalider ma commande et essayer de la payer à nouveau ! #}
+        <a href="{{ path('order') }}" class="btn btn-success p-3"><b>REESSAYER LE PAIEMENT</b></a>
+    </div>
+</div>
+<div class="dropdown-divider"></div>
+<a href="{{ path('products') }}" class="text-light text-left mb-5" style="font-size: 1.2rem; text-decoration: none;"><i class="fas fa-arrow-circle-left"></i> RETOUR BOUTIQUE</b></a>
+<hr>
+
+{# {{ dump(order) }} #}
+
+</div>
+
+{% endblock %}

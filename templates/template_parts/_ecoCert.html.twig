@@ -1,0 +1,45 @@
+{# <style>
+.slick-slide img {
+    max-height: 91px;
+    display:block;
+}
+.slick-slide {
+    display: none; 
+    float: left; 
+    height: 100%; 
+    min-height: 1px;
+}
+.slick-initialized .slick-slide {
+    display: block;
+}
+</style>
+
+<article id="ecoCert carousel" class="container-fluid mb-5">
+    <div class="row">
+      <div class="col-12">
+        <div class="customer-logos slider">
+	  	{% for ecoCert in ecoCert %}
+        <div class="slide mr-5">{{logo }} </div>
+		{% endfor %}
+        </div>
+      </div>
+    </div>    
+</article> #}
+
+
+{# <div class="container-fluid col-md-10 border mt-3 pt-3 bg-success rounded-lg p-3" data-aos="zoom-in"> #}
+<div class="container-fluid col-md-10 border mt-3 pt-3 bg-success rounded-lg p-3">
+    <h3 class="text-center text-light mb-4"><b style="font-size: 3 rem;">TOUS NOS PRODUITS SONT ISSUS D'UNE AGRICULTURE BIOLOGIQUE <br> ET ECO-RESPONSABLE</b></h3>
+    <hr style="border: 1px solid white;">
+    <div class="col-md-12 p-3">
+    <div class="row">
+        {% for ecoCert in ecoCert %}
+    <div class="col-md-3 text-center m-auto mb-3">
+        {# <img src="{{ ecoCert.logo }}" alt="Logo Agriculture Responsable" class="img-fluid" width="120px" height="120px"> #}
+        <img src="/uploads/ecoCertLogo/{{ ecoCert.logo }}" alt="Logo Agriculture Responsable" class="img-fluid">
+    </div>
+        {% endfor %}
+      
+    </div>
+    </div>
+</div>

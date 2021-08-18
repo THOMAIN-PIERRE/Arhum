@@ -1,0 +1,255 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription - Ma boutique{% endblock %}
+
+{% block stylesheets %}
+	<link href={{ asset('assets/css/register.css')}} rel="stylesheet">
+{% endblock %}
+
+{% block javascripts %}
+	<!-- Ajout de l'API Recaptcha dans notre document -->
+	{# <script src="https://www.google.com/recaptcha/api.js"></script> #}
+    <script src="//www.google.com/recaptcha/api.js?h1={{ app.request.locale }}"></script>
+
+</script>
+{% endblock %}
+
+
+{% block body %}
+  
+<div class="container col-md-5 text-dark alert alert-secondary p-4 mb-5 rounded-lg">
+
+    <h1 class="text-center bg-secondary text-warning rounded-lg p-2">INSCRIPTION</h1>
+	<hr class="mt-3">
+
+	{% if notification %}
+		<div class="container col-md-12">
+				<div class="alert alert-success">{{ notification }}</div>
+				{# <div class="alert alert-info"></div> #}
+		</div>
+	{% endif %}
+
+	{{ form_start(form) }}
+
+    <div class="row">  
+		<div class="col-md-8"> 
+        	{{form_row(form.gender)}}
+		</div>
+	</div>
+	<hr class="mt-2 mb-4">
+	<div class="row mb-2">
+		<div class="col-md-6">
+            {{form_row(form.firstname)}}
+		</div>
+		<div class="col-md-6">
+            {{form_row(form.lastname)}}
+		</div>
+	</div>
+	<hr class="mt-2 mb-4">
+	<div class="row mb-4">
+		<div class="col-md-12">
+        	{{form_row(form.email)}}
+		</div>
+	</div>
+	<hr class="mt-2 mb-4">
+	<div class="col-md-7 mb-4 m-auto">   
+		{{form_row(form.password)}} 
+	</div>
+	
+	{# <form action="?" method="POST" class="mt-5">
+      <div class="g-recaptcha" data-sitekey="6LfmAZ8aAAAAAMYnUvi89Pxc3abRqAwb3ov6nCnR"></div>
+    </form> #}
+
+	
+
+
+
+	{# <button class="g-recaptcha" 
+        data-sitekey="6Lfn1J4aAAAAACrxlIKVAs6AC-QfWlaOP8ULqEmD" 
+        data-callback='onSubmit' 
+        data-action='submit'>Submit</button> #}
+
+			{# <div class="text-center mt-3 mb-3">
+				<span class="dot mr-4"></span>
+				<span class="dot mr-4"></span>
+				<span class="dot mr-4"></span>
+				<span class="dot"></span>
+			</div> #}
+
+			<hr class="mt-5">
+
+            <div class="mt-4 mb-2">
+                <p>{{form_row(form.useTerms)}} </p>
+                <p>Consultez ici nos conditions générales d'utilisation et notre politique de confidentialité :</p>
+                <a href="{{ path('cgu') }}" class="badge badge-warning p-2 text-dark border border-dark"><strong>Conditions générales d'utilisation</strong></a>
+                <a href="{{ path('politiqueConfidentialite') }}" class="badge badge-warning border border-dark p-2 text-dark ml-3"><strong>Politique de confidentialité</strong></a>
+            </div>
+
+			<hr>
+
+			{# <input type="hidden" id="recaptcha_response" name="recaptcha_response"> #}
+			{# <input type="hidden" id="recaptcha_response" name="recaptcha_response">
+        	<button class="btn btn-success">S'inscrire</button> #}
+
+			<!-- Ajoutez maintenant le widget avec la clé de site (site key) que vous avez récupéré -->
+			{# <div class="g-recaptcha" data-sitekey="6LfmAZ8aAAAAAMYnUvi89Pxc3abRqAwb3ov6nCnR" id="recaptcha_response"></div> #}
+
+			{# <div class="g-recaptcha" data-sitekey="6LfmAZ8aAAAAAMYnUvi89Pxc3abRqAwb3ov6nCnR"></div> #}
+
+			<!-- Pour voir toutes les variables disponibles dans notre page -->
+			{# {{ dump() }} #}
+
+			{# <form action="?" method="POST">
+				<div class="g-recaptcha" data-sitekey="6LfmAZ8aAAAAAMYnUvi89Pxc3abRqAwb3ov6nCnR"></div>
+				<br/>
+				<input type="submit" value="Submit">
+			</form> #}
+
+			{# <!-- Pour voir toutes les variables disponibles dans notre page -->
+			{{ dump() }} #}
+
+			<div>{{form_row(form.captcha)}}</div>
+
+			<div class="font-weight-bold mt-3">
+				{{form_row(form.submit)}}
+			</div>
+		{{ form_end(form) }} 
+        </div>
+    </div>
+</div>   
+
+{% endblock %}
+
+
+{# {% block javascripts %}
+    <script src="https://www.google.com/recaptcha/api.js?render=6Lfmn1J4aAAAAACrxllKVAs6AC-QfWlaOP8ULqEmD"></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('6Lfmn1J4aAAAAACrxllKVAs6AC-QfWlaOP8ULqEmD', { action: 'home' }).then(function (token) {
+                let recaptcha_response = document.getElementById('recaptcha_response')
+                recaptcha_response.value = token
+            });
+        });
+    </script>
+{% endblock %} #}
+
+
+
+
+{# {% extends 'base.html.twig' %}
+{% block body %}
+
+<div class="container bootstrap snippets bootdeys">
+<div class="row">
+  <div class="col-sm-12">
+	  	<div class="panel panel-default invoice" id="invoice">
+		  <div class="panel-body">
+		    <div class="row">
+
+				<div class="col-sm-6 top-left">
+					<h1><img src="{{ asset('assets/img/shop.png') }}" alt="logo " class="img-fluid"  style="width: 55px; height: 55px;"> "MA BOUTIQUE"</h1>
+                    <h3 style="font-size: 1.5rem; color: black;"># INVOICE : 1234578</h3>
+					<span class="marginright">14 April 2014</span>
+				</div>
+
+				<div class="col-sm-6 top-right">
+						
+			    </div>
+
+			</div>
+			<hr>
+			<div class="row">
+
+				<div class="col-md-4">
+					<p style="font-weight: bold; font-size: 1.5rem; color: grey;">From : Dynofy</p>
+					<p>350 Rhode Island Street</p>
+					<p>Suite 240, San Francisco</p>
+					<p>California, 94103</p>
+					<p>Phone: 415-767-3600</p>
+					<p>Email: contact@dynofy.com</p>
+				</div>
+
+				<div class="col-md-4 to">
+					<p style="font-weight: bold; font-size: 1.5rem; color: grey;">To : John Doe</p>
+					<p>425 Market Street</p>
+					<p>Suite 2200, San Francisco</p>
+					<p>California, 94105</p>
+					<p>Phone: 415-676-3600</p>
+					<p>Email: john@doe.com</p>
+
+			    </div>
+
+			    <div class="col-md-4 text-right">
+					<p style="font-weight: bold; font-size: 1.5rem; color: grey;">Payment details</p>
+					<p>Date: 14 April 2014</p>
+					<p>VAT: DK888-777 </p>
+					<p>Total Amount: $1019</p>
+					<p>Account Name: Flatter</p>
+			    </div>
+
+			</div>
+
+			<div class="row table-row mt-5">
+				<table class="table table-striped">
+			      <thead>
+			        <tr>
+			          <th class="text-center" style="width:5%">#</th>
+			          <th style="width:50%">Item</th>
+			          <th class="text-right" style="width:15%">Quantity</th>
+			          <th class="text-right" style="width:15%">Unit Price</th>
+			          <th class="text-right" style="width:15%">Total Price</th>
+			        </tr>
+			      </thead>
+			      <tbody>
+			        <tr>
+			          <td class="text-center">1</td>
+			          <td>Flatter Theme</td>
+			          <td class="text-right">10</td>
+			          <td class="text-right">$18</td>
+			          <td class="text-right">$180</td>
+			        </tr>
+			        <tr>
+			          <td class="text-center">2</td>
+			          <td>Flat Icons</td>
+			          <td class="text-right">6</td>
+			          <td class="text-right">$59</td>
+			          <td class="text-right">$254</td>
+			        </tr>
+			        <tr>
+			          <td class="text-center">3</td>
+			          <td>Wordpress version</td>
+			          <td class="text-right">4</td>
+			          <td class="text-right">$95</td>
+			          <td class="text-right">$285</td>
+			        </tr>
+			         <tr class="last-row">
+			          <td class="text-center">4</td>
+			          <td>Server Deployment</td>
+			          <td class="text-right">1</td>
+			          <td class="text-right">$300</td>
+			          <td class="text-right">$300</td>
+			        </tr>
+			       </tbody>
+			    </table>
+
+			</div>
+
+			<div class="row mt-3">
+			<div class="col-md-12 text-right">
+					  <p>Subtotal : $1019</p>
+			          <p>Discount (10%) : $101 </p>
+			          <p>VAT (8%) : $73 </p>
+			          <p>Total : $991 </p>
+			</div>
+            <div class="col-md-12 mt-5 text-center">
+				<button class="btn btn-success" id="invoice-print"><i class="fa fa-print"></i> Print Invoice</button>
+			</div>
+			</div>
+
+		  </div>
+		</div>
+	</div>
+</div>
+</div>
+
+{% endblock %} #}

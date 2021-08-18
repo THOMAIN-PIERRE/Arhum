@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes adresses  - Ma boutique{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+<a href="{{ path('account_address_add') }}" class="btn btn-warning text-dark btn-md float-right mt-2"><i class="fas fa-plus"></i> <b>ADRESSE</b></a>
+
+{# <h1><img src="{{ asset('assets/img/letterbox-1.png') }}" alt="Photo de profil" style="width: 70px; height: 70px; border-radius:100%"> Mes adresses<h1> #}
+<h1 class="text-warning">Mes adresses ~ <span class="badge badge-warning text-dark">{{ app.user.addresses | length }}</span><h1>
+
+{# <p>Gérez ici votre adresse de livraison.</p> #}
+{# <a href="{{ path('account') }}">Retour</a> #}
+<div class="dropdown-divider"></div>
+
+{# {{ dump(app.user) }} J'ai accès a mon objet User et donc accès à mes adresses !
+VUE DE MES ADRESSES #}
+
+{% if app.user.addresses | length == 0 %}
+    {# <p class="text-center">
+        Vous n'avez pas encore ajouté d'adresse dans votre compte client. Pour en ajouter une, veuillez <a href="">cliquer ici</a>.
+    </p> #}
+<div class="border border-light alert alert-warning text-dark my-5">
+    <p class="text-center mt-5">Vous n'avez pas encore associé d'adresse a votre compte client !</p>
+    <p class="text-center mb-5"><a href="{{ path('account_address_add') }}" class="badge badge-success badge-pill">Ajouter une adresse</a></p>
+</div>
+{% else %}
+    <div class="row alert alert-warning rounded-lg p-5 mt-5 mb-5">
+            {% for address in app.user.addresses %}
+                <div class="col-md-4 mb-5">
+                    <div class="card border border-dark" style="box-shadow: 12px 15px 15px black;">
+                        <div class="card-body text-dark">
+                            <div>
+                            <h5 class="card-title text-center" style="font-size: 1.5rem; height: 3rem;"><b>{{ address.name | upper }}</b></h5>
+                            <hr>
+                            </div>
+                            <div class="card-text">
+                                <p style="font-size: 1.3rem;">{{ address.address }},</p>
+                                <p style="font-size: 1.3rem;">{{ address.zipCode }} - {{ address.city }}</p> 
+                                <p style="font-size: 1.3rem;">{{ address.country }}</p>
+                            </div>
+                            <hr>
+                            <div class="row">
+                            <div class="col-md-12 text-center">
+                            {# <a href="{{ path('account_address_edit', { 'id' : address.id }) }}">Modifier</a> | <a href="{{ path('account_address_delete', { 'id' : address.id }) }}">Supprimer</a> #}
+                            <p class="card-title col-md-6 float-left"><a href="{{ path('account_address_edit', { 'id' : address.id }) }}"><img src="{{ asset('assets/img/edit.png') }}" alt="Modifier" height="40px"></a></p>  
+                            <p class="card-title col-md-6 float-right"><a href="{{ path('account_address_delete', { 'id' : address.id }) }}"><img src="{{ asset('assets/img/trash.png') }}" alt="Supprimer" height="35px"></a></p>
+                            </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+      
+    {% endif %}
+
+    <div class="dropdown-divider"></div>
+
+        <div class="container mb-5">
+        <a href="{{ path('account') }}" class="text-light text-left" style="font-size: 1.2rem; text-decoration: none;"><i class="fas fa-arrow-circle-left"></i> RETOUR</b></a>
+        </div>
+
+</div>
+
+
+    {# <hr>
+    <a href="{{ path('account') }}"><b class="text-left text-dark"><img src="{{ asset('assets/img/back-arrow.png') }}" alt="Mes commandes"> Retour</b></a> #}
+    {# <a href="{{ path('account') }}">Retour</a> #}
+{% endblock %}
+

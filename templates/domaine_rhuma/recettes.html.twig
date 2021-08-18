@@ -1,0 +1,191 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Magasin d'usine - Showroom
+{% endblock %}
+
+{% block body %}
+
+<!-- Page Content -->
+    <div class="container text-light">
+
+      <!-- Page Heading -->
+      <a href="{{ path('domaineRhuma_recipe_add') }}" class="btn btn-warning text-dark btn-md float-right mt-2"><i class="fas fa-plus"></i> <b>AJOUTER UN COCKTAIL, UNE RECETTE</b></a>
+      <h1 class="text-warning"><i class="fas fa-mortar-pestle"></i> A VOUS DE JOUER ...<span class="badge badge-warning text-dark"></span></h1>
+      <div class="dropdown-divider"></div>
+      <p class="mt-4 alert alert-primary rounded-lg p-3" style="font-size: 1.3rem"><i>Nous vous proposons des recettes originales et suculentes de cocktails et de bons petits plât a base de Rhum. Rejoignez nous et partagez vous aussi vos recettes maisons avec la communauté !</i></p>
+      {# <p class="float-right">Proposer une recette, un cocktail</p>
+      <h1 class="mt-5 text-warning"><i class="fas fa-mortar-pestle"></i> A VOUS DE JOUER ...</h1> #}
+
+      {% if recettes | length > 0 %}
+
+      {# {% if recettes.id is odd %} #}
+
+      {% for recipe in pagination.recipes %}
+
+      {# {% for recette in recettes %} #}
+
+      <!-- Project One -->
+      <div class="dropdown-divider mt-4 mb-4 "></div>
+      <div class="row mt-4 mb-5">
+        <div class="col-md-6
+        {% if recipe.id is odd %}
+        order-md-1
+        {% else %}
+        order-md-2
+        {% endif %}
+        ">
+          <a href="{{ path('detail-recette',{'id':recipe.id}) }}">
+            {# <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt=""> #}
+            {% if recipe.img is null %}
+            <img class="img-fluid rounded border border-warning mb-3" src="{{ asset('assets/img/img-recipe.jpeg') }}" width="600" height="450">
+            {% else %}
+            <img class="img-fluid rounded border border-warning mb-3" src="/uploads/recipes/{{ recipe.img }}" alt="{{ recipe.title }}" width="600" height="400">
+            {% endif %}
+          </a>
+        </div>
+        <div class="col-md-6
+        {% if recipe.id is odd %}
+        order-md-2
+        {% else %}
+        order-md-1
+        {% endif %}
+        ">
+          <h3 class="text-warning">{{ recipe.title | upper }}</h3>
+          <small><i>Proposée par {{ recipe.author }} le {{ recipe.createdAt | date ('d/m/Y') }}</i></small>
+          <p class="mt-4">{{ recipe.resume | raw }}</p>
+          <div class="d-flex align-items-middle mt-4 mb-3"><p class="mr-3">Difficulté : <b>{{ recipe.level }}</b></p><p class="mr-3">Préparation : <b>{{ recipe.time }} min</b></p> <p>Portions : <b>{{ recipe.portions }}</b></p></div>
+          <a class="btn btn-primary" href="{{ path('detail-recette',{'id':recipe.id}) }}"><i class="far fa-eye"></i> VOIR LA FICHE PRATIQUE</a>
+          {# <div class="align-middle text-left mt-5"> #}
+            {# <a href="{{ path('admin_ads_edit', {'id': ad.id}) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+            <a href="{{ path('admin_ads_delete', {'id': ad.id}) }}" class="btn btn-danger"><i class="fas fa-trash" onclick="return confirm(`Êtes vous sur de vouloir supprimer l'annonce n°  ?`)"></i></a> #}
+            {# <a href="" class="btn btn-warning text-dark mr-4"><i class="fas fa-edit"></i> EDITER</a>
+            <a href="" class="btn btn-danger"><i class="fas fa-trash" onclick="return confirm(`Êtes vous sur de vouloir supprimer l'annonce n°  ?`)"></i> SUPPRIMER</a>
+          </div> #}
+
+          <div class="text-left mt-5">
+        {# <a href="{" class="btn btn-danger btn-md mt-2 mb-5 mr-4" style="box-shadow: 0px 0px 20px black;"><b>RESERVER</b></a> #}
+        {% if app.user and app.user.publicName == recipe.author %}
+        <a href="{{path('domaineRhuma_recipe_edit', {'id': recipe.id})}}" class="btn btn-warning border border-dark text-dark btn-md mt-2 mb-5 mr-4" style="box-shadow: 0px 0px 20px white;"><i class="fas fa-edit"></i> <b>MODIFIER MA RECETTE</b></a>
+        <a href="{{path('domaineRhuma_recipe_delete', {'id': recipe.id})}}" class="btn btn-danger border border-dark text-light btn-md mt-2 mb-5" style="box-shadow: 0px 0px 20px white;"><i class="fas fa-trash" onclick="return confirm(`Êtes vous sur de vouloir supprimer votre recette ?`)"></i> <b>SUPPRIMER MA RECETTE</b></a>
+        {% endif %}
+    </div>
+
+
+        </div>
+      </div>
+      <!-- /.row -->
+
+      {# <div class="dropdown-divider mt-4"></div> #}
+
+      {% endfor %}
+
+      {% include 'template_parts/_pagination.html.twig' with {'route' : 'recettes'} %}
+
+      <div class="dropdown-divider mt-4"></div>
+
+      <div class="container mt-1 mb-5">      
+          <a href="{{ path('products') }}" class="text-light text-left" style="font-size: 1.2rem; text-decoration: none;"><i class="fas fa-arrow-circle-left"></i> RETOUR BOUTIQUE</a>
+      </div>  
+
+      {% else %}
+
+    <div class="container mt-5 mb-5">
+        <div class="col-md-12 bg-danger rounded-lg p-4" style="font-size: 2rem;">
+            <div class="mt-5 mb-5 text-center text-light">
+              <p>Il n'y a pas encore de recettes dans cette section ! </p>
+                {# <a href="" class="badge badge-success p-3 mr-5" style="font-size: 1rem;">Accueil du site</a> #}
+                {# <a href="" class="badge badge-warning p-3" style="font-size: 1rem;">ALLER SUR LA BOUTIQUE</a> #}
+            </div>
+        </div>
+    </div>
+
+{% endif %}
+
+</div>
+
+
+      <!-- Project Two -->
+      {# <div class="row mt-4">
+        <div class="col-md-7 order-md-2">
+          <a href="#">
+            <img class="img-fluid rounded mb-3 mb-md-0" src="https://img-3.journaldesfemmes.fr/kWtwAmukicQVZS5ECptCJPQFuTY=/748x499/smart/d1d0e72ce1b244939598dccfc85d3a29/recipe-jdf/10025185.jpg" alt="">
+          </a>
+        </div>
+        <div class="col-md-5 order-md-1">
+          <h3 class="text-warning">MOJITO CUBAIN</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>
+          <div class="d-flex align-items-middle mt-4 mb-5"><p class="mr-3">Difficulté : <b>Facile</b></p><p class="mr-3">Préparation : <b>5min</b></p> <p>Portions : <b>Pour 3 personnes</b></p></div>
+          <a class="btn btn-primary" href="#"><i class="far fa-eye"></i> VOIR LA FICHE PRATIQUE</a>
+        </div>
+      </div> #}
+      <!-- /.row -->
+
+      {# <div class="dropdown-divider mt-4"></div> #}
+
+      <!-- Project Three -->
+      {# <div class="row mt-4">
+        <div class="col-md-7">
+          <a href="#">
+            <img class="img-fluid rounded mb-3 mb-md-0" src="https://easytrucs.com/wp-content/uploads/2020/11/Bugnes-tres-legeres-cuites-au-four.jpg" alt="">
+          </a>
+        </div>
+        <div class="col-md-5">
+          <h3 class="text-warning">MERVEILLES AU RHUM</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, temporibus, dolores, at, praesentium ut unde repudiandae voluptatum sit ab debitis suscipit fugiat natus velit excepturi amet commodi deleniti alias possimus!</p>
+          <div class="d-flex align-items-middle mt-4 mb-5"><p class="mr-3">Difficulté : <b>Facile</b></p><p class="mr-3">Préparation : <b>5min</b></p> <p>Portions : <b>3</b></p></div>
+          <a class="btn btn-primary" href="#"><i class="far fa-eye"></i> VOIR LA FICHE PRATIQUE</a>
+        </div>
+      </div> #}
+      <!-- /.row -->
+
+      {# <div class="dropdown-divider mt-4"></div> #}
+
+      <!-- Project Four -->
+      {# <div class="row mt-4 mb-5">
+
+        <div class="col-md-7 order-md-2">
+          <a href="#">
+            <img class="img-fluid rounded mb-3 mb-md-0" src="https://i.pinimg.com/originals/86/9a/e2/869ae29e91f315c575dc549d2a4b2c16.jpg" alt="">
+          </a>
+        </div>
+        <div class="col-md-5 order-md-1">
+          <h3 class="text-warning">ZOMBIE</h3>
+          <p>Lorem ipsum dolor sit amet, consectetRoute de Lamentin, Fort-de-France 97200, Martinique-4 mb-5"><p class="mr-3">Difficulté : <b>Facile</b></p><p class="mr-3">Préparation : <b>5min</b></p> <p>Portions : <b>3</b></p></div>
+          <a class="btn btn-primary" href="#"><i class="far fa-eye"></i> VOIR LA FICHE PRATIQUE</a>
+        </div>
+      </div>
+
+      </div> #}
+      <!-- /.row -->
+
+
+      <!-- Pagination -->
+      {# <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">3</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      </ul>
+
+    </div> #}
+    <!-- /.container -->
+
+
+{% endblock %}

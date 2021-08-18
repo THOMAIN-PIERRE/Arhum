@@ -1,0 +1,177 @@
+{# <div class="dropdown-divider"></div> #}
+
+<!-- <div class="container col-12"> -->
+<!-- Footer -->
+<footer class="footer static-bottom font-small bg-dark text-light w-100">
+
+    <!-- Footer Links -->
+    <div class="container text-center text-md-left p-3">
+  
+      <!-- Grid row -->
+      <div class="row">
+  
+        <!-- Grid column -->
+        <div class="col-md-4 mx-auto">
+  
+          <!-- Content -->
+          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Qui sommes-nous ?</h5>
+          <p class="text-warning">Tous nos produits sont garantis 100% eco-responsable et écologique. Retrouvez sur notre site les meilleures marques de nos partenaires et de petits fabriquants locaux regroupés avec nous en coopérative : Trois Rivières, Neisson, LaMauny, ... Quelle que soit votre recherche, vous êtes sur le bon site !</p>
+  
+        </div>
+        <!-- Grid column -->
+  
+        <hr class="clearfix w-100 d-md-none">
+  
+        <!-- Grid column -->
+        <div class="col-md-2 mx-auto">
+  
+          <!-- Links -->
+          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">DOMAINE RHUMA</h5>
+  
+          <ul class="list-unstyled">
+            {# <li>
+              <a class="text-warning" href="{{ path('nous') }}">QUI SOMMES-NOUS</a>
+            </li> #}
+            <li>
+              <a class="text-warning" href="{{ path('magasin-usine') }}">MAGASIN D'USINE</a>
+            </li>
+              <a class="text-warning" href="{{ path('recettes') }}">RECETTES</a>
+            <li>
+              <a class="text-warning" href="{{ path('environnement') }}">NOS VALEURS</a>
+            </li>
+            <li>
+            </li>
+            {# <li>
+              <a class="text-warning" href="{{ path('detail-recette') }}">DETAIL RECETTES</a>
+            </li> #}
+            {# <li>
+              <a class="text-warning" href="#!">ACCESSOIRES</a>
+            </li> #}
+          </ul>
+  
+        </div>
+        <!-- Grid column -->
+  
+        <hr class="clearfix w-100 d-md-none">
+  
+        <!-- Grid column -->
+        <div class="col-md-2 mx-auto">
+  
+          <!-- Links -->
+          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">CHARTE QUALITÉ</h5>
+  
+          <ul class="list-unstyled ">
+            {# <li>
+              <a class="text-warning" href="{{ path('livraison') }}">LIVRAISON</a>
+            </li> #}
+            {# <li>
+              <a class="text-warning" href="{{ path('securite-paiement') }}">PAIEMENT SECURISE</a>
+            </li> #}
+            <li>
+              <a class="text-warning" href="{{ path('cgu') }}">CONDITIONS GENERALES D'UTILISATION</a>
+            </li>
+            <li>
+              <a class="text-warning" href="{{ path('politiqueConfidentialite') }}">POLITIQUE DE CONFIDENTIALITE</a>
+            </li>
+            <li>
+              <a class="text-warning" href="{{ path('mentionsLegales') }}">MENTIONS LEGALES</a>
+            </li>
+          </ul>
+  
+        </div>
+        <!-- Grid column -->
+  
+        <hr class="clearfix w-100 d-md-none">
+  
+        <!-- Grid column -->
+        <div class="col-md-2 mx-auto">
+  
+          <!-- Links -->
+          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">RETROUVEZ NOUS SUR ...</h5>
+  
+          <ul class="list-unstyled">
+            <li>
+              <a class="text-warning" href="https://www.facebook.com/?stype=lo&jlou=Aff-Jrd3VANPrhrO6gWl6DnzYHzVN6fZMqVJiCD_QXjkp4dl0FFO2Ik3HhSRco3HKJfThbYVuiTJsriT815fgexp&smuh=36893&lh=Ac8IAcGTV6FUtiPy" target="_blank">FACEBOOK</a>
+            </li>
+            <li>
+              <a class="text-warning" href="https://www.pinterest.fr/">PINTEREST</a>
+            </li>
+            <li>
+              <a class="text-warning" href="https://www.instagram.com/?hl=fr" target="_blank">INSTAGRAM</a>
+            </li>
+            <li>
+              <a class="text-warning" href="https://www.snapchat.com/l/fr-fr/" target="_blank">SNAPCHAT</a>
+            </li>
+          </ul>
+  
+        </div>
+        <!-- Grid column -->
+  
+      </div>
+      <!-- Grid row -->
+  
+    </div>
+    <!-- Footer Links -->
+  
+    {# <div class="dropdown-divider"></div> #}
+  
+    <!-- Call to action -->
+    {% if not app.user %}
+    
+    <ul class="list-unstyled list-inline text-center py-2">
+      <li class="list-inline-item">
+        <h5 class="mb-1">Inscription gratuite !</h5>
+      </li>
+      <li class="list-inline-item">
+        <a href="{{ path('app_login') }}" class="btn btn-success btn-rounded">Connexion</a>
+        <a href="{{ path('register') }}" class="btn btn-warning btn-rounded">Inscription</a>
+      </li>
+    </ul>
+    {% endif %}
+    <!-- Call to action -->
+  
+    {# <div class="dropdown-divider"></div> #}
+  
+    <!-- Social buttons -->
+    {# <h4 class="text-center">Suivez-nous</h4>
+    <ul class="list-unstyled list-inline text-center">
+      <li class="list-inline-item">
+        <a href="#" class="btn-floating btn-fb mx-1 text-warning">
+          <i class="fab fa-facebook-f"> </i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a href="#" class="btn-floating btn-tw mx-1 text-warning">
+          <i class="fab fa-twitter"> </i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a href="#" class="btn-floating btn-gplus mx-1 text-warning">
+          <i class="fab fa-google-plus-g"> </i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a href="#" class="btn-floating btn-li mx-1 text-warning">
+          <i class="fab fa-linkedin-in"> </i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a href="#" class="btn-floating btn-dribbble mx-1 text-warning">
+          <i class="fab fa-dribbble"> </i>
+        </a>
+      </li>
+    </ul> #}
+
+    <!-- Social buttons -->
+  
+    <!-- Copyright -->
+    <div class="d-flex justify-content-around">
+      {# <a href="#" class="text-warning"> rhumasug.com</a>  #}
+      <a class="navbar-brand text-light" href="{{ path('home') }}">© 2020 Copyright : <img src="{{ asset('assets/img/logo3.png') }}" alt="" width="90px" height="50px"></a>
+      <a href="#"><h5 class="text-light float-right align-items-xl-baseline font-weight-bold text-uppercase mt-3 mb-4 mr-2"> <i class="fas fa-arrow-circle-up"></i> Back to Top</h5></a>
+    </div>
+    <!-- Copyright -->
+  
+  </footer>
+  <!-- </div> -->
+  <!-- Footer -->

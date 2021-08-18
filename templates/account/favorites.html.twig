@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes produits préférés  - Rhuma Sug{% endblock %}
+
+{% block body %}
+
+<div class="container col-10 text-light">
+
+<div class="container-fluid col-12 bg-secondary rounded-lg p-3">
+    <div class="row d-flex justify-content-around mt-5 m-auto">
+        <a href="{{ path('account_order') }}"><b class="badge badge-warning border border-dark float-right p-3" style="font-size: 1rem;"><i class="fas fa-eye text-dark mr-1"></i> MES COMMANDES</b></a>
+        <a href="{{ path('account_favorites') }}"><b class="badge badge-warning border border-dark float-right p-3" style="font-size: 1rem;"><i class="fas fa-eye text-dark mr-1"></i> MES PRODUITS</b></a>
+        <a href="{{ path('account_comments') }}"><b class="badge badge-warning border border-dark float-right p-3" style="font-size: 1rem;"><i class="fas fa-eye text-dark mr-1"></i> MES COMMENTAIRES</b></a>
+    </div>
+</div>
+
+<i class="fas fa-wine-bottle fa-3x float-right text-warning mt-5"></i>
+{# <i class="far fa-heart fa-3x float-right text-warning"></i> #}
+
+<h1 class="text-warning mt-5">MES PRODUITS ACHETES <span class="badge badge-warning text-dark mt-2" style="font-size: 2rem;"></span></h1>
+<div class="dropdown-divider"></div>
+
+
+{# 
+{% for favoriteProduct in favoriteProducts %}
+{% if favoriteProduct.myOrder.user == app.user and favoriteProduct.myOrder.state >= 1 %}
+<div class="row mb-5">
+<div class="col-md-6">
+<h4 class="text-warning text-center alert alert-warning text-dark font-weight-bold mt-5">NOMBRE DE PRODUITS COMMANDES</h4>
+<h4 class="text-center text-warning mt-4" style="font-size: 2.5rem;">5</h4>
+</div>
+<div class="col-md-6">
+<h4 class="text-warning text-center alert alert-warning text-dark font-weight-bold mt-5">SOMME DEPENSEE</h4>
+<h4 class="text-center text-warning mt-4" style="font-size: 2.5rem;">255.00 €</h4>
+</div>
+</div>
+{% endif %}
+{% endfor %} #}
+
+
+<table class="table mt-5 mb-5 text-light">
+        <thead>
+        <tr>
+            <th scope="col" class="text-center align-middle text-warning">PHOTO</th>
+            <th scope="col" class="text-center align-middle text-warning">PRODUIT</th>
+            <th scope="col" class="text-center align-middle text-warning">CONDITIONNEMENT</th>
+            <th scope="col" class="text-center align-middle text-warning">DEGRE</th>
+            <th scope="col" class="text-center align-middle text-warning">QUANTITE</th>
+            <th scope="col" class="text-center align-middle text-warning">PRIX UNITAIRE</th>
+            <th scope="col" class="text-center align-middle text-warning">DATE D'ACHAT</th>
+            <th scope="col" class="text-center align-middle text-warning">N° COMMANDE</th>
+            {# <th scope="col" class="text-center align-middle text-warning">COMMENTAIRE</th>
+            <th scope="col" class="text-center align-middle text-warning">NOTE</th> #}
+        </tr>
+        </thead>
+        <tbody>
+        {% for favoriteProduct in favoriteProducts %}
+        {% if favoriteProduct.myOrder.user == app.user and favoriteProduct.myOrder.state >= 1 %}
+        {# {% for boughtProduct in pagination.boughtProducts %}
+        {% if boughtProduct.myOrder.user == app.user and boughtProduct.myOrder.state >= 1 %} #}
+        <tr class="alert alert-warning mb-5" style="font-size: 1.2rem;">
+            {# <td class="text-light text-center align-middle"><b>{{ orderDetail.product }}</b></td> #}
+            <td class="text-dark text-center align-middle"><img src="/uploads/products/{{ favoriteProduct.picture }}" alt="{{ favoriteProduct.product }}" height="75px" class="border border-dark"></td>
+            <td class="text-dark text-center align-middle"><b>{{ favoriteProduct.product }}</b></td>
+            <td class="text-dark text-center align-middle">{{ favoriteProduct.package }} {{ favoriteProduct.content }}</td>
+            <td class="text-dark text-center align-middle">{{ favoriteProduct.scale }}°</td>
+            <td class="text-dark text-center align-middle">x {{ favoriteProduct.quantity }}</td>
+            {# <td class="text-dark text-center align-middle"><b>{{ (orderDetail.price / 100)|number_format(2, ',', '.') }} €</b></td> #}
+            <td class="text-dark text-center align-middle">{{ (( favoriteProduct.price)/100)  | number_format(2, ',', '.')}} €</td>
+            <td class="text-dark text-center align-middle">{{ favoriteProduct.myOrder.createdAt | date ('d/m/Y') }} à {{ favoriteProduct.myOrder.createdAt | date ('H:i') }}</td>
+            <td class="text-dark text-center align-middle"><b class="badge badge-success badge-pill p-2" style="box-shadow: 5px 10px 15px black;">{{ favoriteProduct.myOrder.reference }}</b></td>
+            {# <td class="text-dark text-center align-middle"><a href="{{ path('review', { 'id' : product.id }) }}" class="btn btn-warning border border-dark text-dark" style="box-shadow: 5px 10px 15px black;"><b> ECRIRE UN COMMENTAIRE</b></a></td> #}
+            {# <td class="text-dark text-center align-middle"><a href="{{ path('add_to_cart',{'IdProduct': favoriteProducts.IdProduct}) }}" class="btn btn-warning border border-dark text-dark" style="box-shadow: 5px 10px 15px black;"><b><i class="fas fa-shopping-cart text-dark"></i> AJOUTER AU PANIER</b></a></td> #}
+            {# <td class="text-dark text-center align-middle"><a href="" class="btn btn-warning border border-dark text-dark" style="box-shadow: 5px 10px 15px black;"><b><i class="fas fa-shopping-cart text-dark"></i> AJOUTER AU PANIER</b></a></td> #}
+            {# <td class="text-dark text-center align-middle"><b>{{ favoriteProduct.reviews.comment }}</b></td> #}
+            {# <td class="text-dark text-center align-middle"><b>{{ favoriteProduct.reviews.note }}</b></td> #}
+        </tr>
+        {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {# {% include 'template_parts/_pagination.html.twig' with {'route' : 'account_favorites'} %} #}
+
+</div>
+
+    <div class="container-fluid col-10 mt-5 mb-5">
+        <div class="dropdown-divider"></div>
+        <a href="{{ path('account_order') }}" class="text-light text-left" style="font-size: 1.2rem; text-decoration: none;"><i class="fas fa-arrow-circle-left"></i> RETOUR</b></a>
+        </div>
+
+{% endblock %}

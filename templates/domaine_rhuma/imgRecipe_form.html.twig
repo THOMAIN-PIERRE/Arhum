@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier une illustration - Rhuma Sug{% endblock %}
+
+{% block stylesheet %}
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+{# <a href="" class="btn btn-warning text-dark btn-md float-right">Modifier mon informations de profil</a> #}
+
+<h1 class="text-warning">MODIFIER L'ILLUSTRATION<h1>
+{# <a href="{{ path('account_profile') }}">Retour</a> #}
+<div class="dropdown-divider"></div>
+
+{% if notification %}
+	<div class="container col-md-8 mt-5">
+		<div class="bg-success rounded-lg text-light text-center p-2"><i class="far fa-check-circle"></i> {{ notification }}</div>
+	</div>
+{% endif %}
+
+<div class="container col-md-6 bg-light rounded-lg my-5 p-4">
+
+{{ form_start(form) }}
+
+<div class="row">
+<div class="col-md-9">
+        {{ form_row(form.img) }}
+    </div>
+<div class="col-md-3 mb-5">
+    {% if recette.img == null or recette.img == "e29d5ce22434c6895e856fd36360d66b.png" %}
+    <img src="{{ asset('assets/img/profile-user.png') }}" alt="Avatar de {{ recette.img }}" class="img-fluid" style="font-size: 2.5rem;" width="100" height="120"/>
+    {% else %}
+    <img src="/uploads/recipes/{{ recette.img }}" alt="{{ recette.title }}" class="img-fluid border border-dark text-center m-auto" style="font-size: 2.5rem;"/>
+    <a href="{{ path('domaineRhuma_imgRecipe_delete', {'id' : recette.id}) }}" style="font-size: 1.3rem; color: black;"><u>Supprimer</u></a>
+    {% endif %}
+</div>
+</div>
+<div class="dropdown-divider mb-4"></div>
+<div class="col-md-6 m-auto">
+    {{ form_row(form.submit) }}
+</div>
+
+
+{{ form_end(form) }}
+
+</div>
+
+
+<div class="dropdown-divider"></div>
+
+        <div class="container mb-5">
+        <a href="{{ path('recettes') }}" class="text-light text-left" style="font-size: 1.2rem; text-decoration: none;"><i class="fas fa-arrow-circle-left"></i> RETOUR</b></a>
+        </div>
+
+</div>
+</div>
+
+{% endblock %}
+

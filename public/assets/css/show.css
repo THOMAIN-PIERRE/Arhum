@@ -1,0 +1,20 @@
+  
+  .zoom-effect-container {
+      /* float: left;
+      width: 50%;
+      height: 50%;
+      margin: 0 auto; */
+      /*pour cacher la part de l'image qui va dépasser du cadre*/
+      overflow: hidden;
+  }
+  
+  .image-card img {
+    -webkit-transition: 0.4s ease;
+    transition: 0.4s ease;
+  }
+  
+  .zoom-effect-container:hover .image-card img {
+    -webkit-transform: scale(1.40);
+    transform: scale(1.40);
+  }
+  

@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation de commande - Rhuma Sug{% endblock %}
+
+{% block body %}
+
+<div class="container">
+<i class="fas fa-check-square text-success float-right fa-3x"></i>
+<h2 class="text-success mb-3"><b>CONFIRMATION DE COMMANDE</b></h2>
+<div class="dropdown-divider mb-4"></div>
+<div class="row mt-4 mb-4">
+    <div class="col-md-3 text-center border-right">
+        <i class="fas fa-thumbs-up text-success fa-6x"></i>
+    </div>
+    <div class="col-md-9 text-center text-left text-light">
+        <p>Bonjour <strong class="text-success">{{ order.user.firstname }} {{ order.user.lastname }},</strong></p>
+        <p>Nous vous remercions pour votre commande n°<strong class="text-success">{{ order.reference }}</strong>.</p>
+        <p>Une confirmation vient de vous être envoyée par mail à l'adresse <span class="text-success"><i>" {{ order.user.email }} "</i></span></p>
+    </div>
+</div>
+<div class="dropdown-divider mb-4"></div>
+<div class="row mt-5 mb-4">
+    <div class="col-md-3 text-center border-right m-auto">
+        <img src="https://i.ibb.co/gMY7vbf/map.png" alt="map_icon" width="150px", height="130px" class="m-5" style="border: 7px solid #5cb85c">
+    </div>
+    <div class="col-md-9 text-center text-light">
+        <p class="text-center mb-4">Votre commande sera livrée par <strong class="text-success">{{ order.carrierName | upper}}</strong> à l'adresse suivante :</p>
+        <p class="col-4 border border-light p-3 m-auto"><b>{{ order.delivery | raw }}</b></p>
+        <p class="text-light mt-5 mb-4">Pour suivre votre commande, rendez-vous dans votre<a href="{{ path('account_order') }}" class="text-warning"> <span class="text-warning font-weight-bold">"ESPACE PERSONNEL"</span></a></p>
+    </div>
+</div>
+<div class="dropdown-divider"></div>
+<a href="{{ path('products') }}" class="text-light text-left mb-5" style="font-size: 1.2rem; text-decoration: none;"><i class="fas fa-arrow-circle-left"></i> RETOUR BOUTIQUE</b></a>
+<hr>
+</div>
+</div>
+
+{% endblock %}
+
+
+
+{# {% extends 'base.html.twig' %}
+
+{% block title %}Erreur de paiement - Rhuma Sug{% endblock %}
+
+{% block body %}
+
+<div class="container">
+<i class="fas fa-times float-right text-warning fa-3x"></i>
+<h2 class="text-warning mb-3">ECHEC DU PAIEMENT</h2>
+<div class="dropdown-divider mb-4"></div>
+<div class="row mt-5 mb-5 text-center">
+    <div class="col-md-3 border-right m-auto p-5">
+        <i class="fas fa-exclamation-circle text-warning fa-8x"></i>
+    </div>
+    <div class="col-md-9">
+        <p class="text-light">Bonjour <strong class="text-warning">{{ order.user.firstname }} {{ order.user.lastname }}</strong>, </p>
+        <p class="text-light">Il semblerait que votre paiement ait échoué pour votre commande n°<strong class="text-warning">{{ order.reference }}</strong>.</p>
+        <p class="text-light mb-5">Une confirmation d'erreur vient de vous être envoyée par mail à l'adresse <span class="text-warning"><b><i>" {{ order.user.email }} "</i></b></span></p>
+        <a href="{{ path('order') }}" class="btn btn-success p-3"><b>REESSAYER LE PAIEMENT</b></a>
+    </div>
+</div>
+<div class="dropdown-divider"></div>
+<a href="{{ path('products') }}" class="text-light text-left mb-5" style="font-size: 1.2rem; text-decoration: none;"><i class="fas fa-arrow-circle-left"></i> RETOUR BOUTIQUE</b></a>
+<hr> #}
+
+{# {{ dump(order) }} #}
+
+{# </div>
+
+{% endblock %} #}

@@ -1,0 +1,203 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Magasin d'usine - Showroom{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
+{% endblock %}
+
+{% block body %}
+
+<!-- Page Content -->
+<div class="container">
+
+  <!-- Portfolio Item Heading -->
+  <h1 class="my-4 text-warning"><i class="fas fa-store text-warning"></i> MAGASIN D'USINE 
+    <small></small>
+  </h1>
+
+  {# {% if informations | length > 0 %} #}
+  {% for information in informations %}
+
+  <!-- Portfolio Item Row -->
+  <div class="row">
+
+    <div class="col-md-8 mb-5">
+      <img class="img-fluid rounded-lg border border-warning" src="/uploads/outletStore/{{ information.mainPicture }}" alt="" width="750px" height="520px">
+    </div>
+
+    <div class="col-md-4">
+      <h3 class="text-light">Horaires de la boutique</h3>
+
+      
+    <table class="table text-light">
+    <thead>
+        <tr>
+        <th scope="col" class="text-warning">Jour</th>
+        <th scope="col" class="text-warning">Matin</th>
+        <th scope="col" class="text-warning">Après-midi</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <th scope="row">Lundi</th>
+        <td>{{ information.openHours.mondayAM }}</td>
+        <td>{{ information.openHours.mondayPM }}</td>
+        </tr>
+        <tr>
+        <th scope="row">Mardi</th>
+        <td>{{ information.openHours.tuesdayAM }}</td>
+        <td>{{ information.openHours.tuesdayPM }}</td>
+        </tr>
+        <tr>
+        <th scope="row">Mercredi</th>
+        <td>{{ information.openHours.wednesdayAM }}</td>
+        <td>{{ information.openHours.wednesdayPM }}</td>
+        </tr>
+         <th scope="row">Jeudi</th>
+        <td>{{ information.openHours.thursdayAM }}</td>
+        <td>{{ information.openHours.thursdayPM }}</td>
+        </tr>
+         <th scope="row">Vendredi</th>
+        <td>{{ information.openHours.fridayAM }}</td>
+        <td>{{ information.openHours.fridayPM }}</td>
+        </tr>
+         <th scope="row">Samedi</th>
+         <td>{{ information.openHours.saturdayAM }}</td>
+        <td>{{ information.openHours.saturdayPM }}</td>
+        {# <td colspan="2" class="text-left"> 9h00 - 18h00 en continue</td> #}
+        </tr>
+    </tbody>
+    </table>
+
+    <div class="border border-warning">
+    <p class="text-light text-center mt-3"><b>ADRESSE DE LA BOUTIQUE</b></p>
+    <p class="text-light text-center">{{ information.storeAddress }}</p>
+    </div>
+
+      {# <ul >
+        <li class="text-light">Lorem Ipsum</li>
+        <li class="text-light">Dolor Sit Amet</li>
+        <li class="text-light">Consectetur</li>
+        <li class="text-light">Adipiscing Elit</li>
+      </ul> #}
+    </div>
+
+
+<!-- Block coordonnées -->
+
+{# <div class="container">
+	<div class="row text-center">
+	  <div class="col-4 box1 pt-4">
+        <a href="tel:+123456789"><i class="fas fa-phone fa-3x"></i>
+        <h3 class="d-none d-lg-block d-xl-block">Phone</h3>
+        <p class="d-none d-lg-block d-xl-block">+123456789</p></a>
+      </div>
+      <div class="col-4 box2 pt-4">
+        <a href=""><i class="fas fa-home fa-3x"></i>
+        <h3 class="d-none d-lg-block d-xl-block">Address</h3>
+        <p class="d-none d-lg-block d-xl-block">Piazza del Colosseo, 1, 00184 Roma RM</p></a>
+      </div>
+      <div class="col-4 box3 pt-4">
+        <a href="mailto:test@test.com"><i class="fas fa-envelope fa-3x"></i>
+        <h3 class="d-none d-lg-block d-xl-block">E-mail</h3>
+        <p class="d-none d-lg-block d-xl-block">test@test.com</p></a>
+      </div>
+	</div>
+</div>
+ #}
+<!-- fin block coordonnées -->
+
+
+  </div>
+  <!-- /.row -->
+    <div>
+    <h3 class="my-3 text-warning">La Rhumerie Rhuma Sug</h3>
+    <p class="text-light">{{ information.presentation }}</p>
+    </div>
+
+
+
+{# <iframe class="mt-4 rounded-lg border border-warning" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4590.809710444368!2d-61.03675891751385!3d14.63348091249329!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c6aa197637c1e15%3A0x7b81944ece8b1506!2sDistillerie%20La%20Favorite!5e0!3m2!1sfr!2sit!4v1614003577241!5m2!1sfr!2sit" width="100%" height="320" style="border:0;" allowfullscreen="" loading="lazy"></iframe> #}
+<div id="map" class="mt-4 rounded-lg border border-warning text-center rounded-lg" style="width: 100%; height: 355px;"></div>
+
+
+  <!-- Related Projects Row -->
+  <h3 class="my-4 text-warning mt-5">Un espace de vente de 120 m2 - Un Bar vous propose de découvrir nos produits</h3>
+
+  <div class="row mb-2">
+
+    <div class="col-md-3 col-sm-6 mb-4">
+      <a href="#">
+            <img class="img-fluid rounded-lg border border-warning" src="/uploads/outletStore/{{ information.pictureOne }}" alt="" width="500px" height="300px">
+          </a>
+    </div>
+
+    <div class="col-md-3 col-sm-6 mb-4">
+      <a href="#">
+            <img class="img-fluid rounded-lg border border-warning" src="/uploads/outletStore/{{ information.pictureTwo }}" alt="" width="500" height="300">
+          </a>
+    </div>
+
+    <div class="col-md-3 col-sm-6 mb-4">
+      <a href="#">
+            <img class="img-fluid rounded-lg border border-warning" src="/uploads/outletStore/{{ information.pictureThree }}" alt="" width="500" height="300">
+          </a>
+    </div>
+
+    <div class="col-md-3 col-sm-6 mb-4">
+      <a href="#">
+            <img class="img-fluid rounded-lg border border-warning" src="/uploads/outletStore/{{ information.pictureFour }}" alt="" width="500" height="300">
+          </a>
+    </div>
+
+  </div>
+  <!-- /.row -->
+
+  <div class="mb-5">
+    <p class="text-light">{{ information.salesAreaDescription }}</p>
+  </div>
+
+</div>
+
+<!-- /.container -->
+
+
+{% block Javascripts %}
+
+ <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+	<script type="text/javascript">
+            // On initialise la latitude et la longitude de BIDOS (centre de la carte)
+            {# var lat = 43.1717251;
+            var lon = -0.6063067; #}
+            var lat = {{ information.latitude }};
+            var lon = {{ information.longitude }};
+            var macarte = null;
+            // Fonction d'initialisation de la carte
+            function initMap() {
+                // Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
+                macarte = L.map('map').setView([lat, lon], 17);
+                // Leaflet ne récupère pas les cartes (tiles) sur un serveur par défaut. Nous devons lui préciser où nous souhaitons les récupérer. Ici, openstreetmap.fr
+                L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+                    // Il est toujours bien de laisser le lien vers la source des données
+                    attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+                    minZoom: 1,
+                    maxZoom: 25,
+                }).addTo(macarte);
+                var marker = L.marker([lat, lon]).addTo(macarte);
+            }
+            window.onload = function(){
+		// Fonction d'initialisation qui s'exécute lorsque le DOM est chargé
+		initMap(); 
+            };
+        </script>
+        
+{% endblock %}
+
+
+
+  {% endfor %}
+  {# {% endif %} #}
+
+{% endblock %} 
+

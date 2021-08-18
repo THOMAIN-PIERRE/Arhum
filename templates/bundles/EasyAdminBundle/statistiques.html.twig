@@ -1,0 +1,109 @@
+{{dump()}}
+<div class="alert bg-success text-light">
+                <h2 class="alert-heading my-3" style="color:yellow; text-shadow: 2px 6px 2px black; font-size: 2em;"><i class="fas fa-trophy"></i><strong> ARTICLES LES PLUS POPULAIRES</strong></h2>
+                <table class="table table-hover text-white">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">PRODUIT</th>
+                            <th class="text-center align-middle" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">QUANTITE</th>
+                            <th class="text-center" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">C.A.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pierre in bestProducts %}
+                        <tr>
+                            <td class="text-center align-middle">{{ pierre.produit }}<strong></strong></td>
+                            <td class="text-center align-middle">{{ pierre.quantity }}<strong></strong></td>
+                            <td class="text-center align-middle">{{ pierre.prix }} €<strong></strong></td>
+                            
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+<div class="alert bg-success text-light">
+                <h2 class="alert-heading my-3" style="color:yellow; text-shadow: 2px 6px 2px black; font-size: 2em;"><i class="fas fa-trophy"></i><strong> ARTICLES LES MOINS POPULAIRES</strong></h2>
+                <table class="table table-hover text-white">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">PRODUIT</th>
+                            <th class="text-center align-middle" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">QUANTITE</th>
+                            <th class="text-center" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">C.A.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pierre in worstProducts %}
+                        <tr>
+                            <td class="text-center align-middle">{{ pierre.produit }}<strong></strong></td>
+                            <td class="text-center align-middle">{{ pierre.quantity }}<strong></strong></td>
+                            <td class="text-center align-middle">{{ pierre.prix }} €<strong></strong></td>
+                            
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
+<div class="alert bg-success text-light">
+                <h2 class="alert-heading my-3" style="color:yellow; text-shadow: 2px 6px 2px black; font-size: 2em;"><i class="fas fa-trophy"></i><strong>LISTING DES CLIENTS</strong></h2>
+                <table class="table table-hover text-white">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">NOM</th>
+                            <th class="text-center align-middle" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">PRENOM</th>
+                            <th class="text-center" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">MAIL</th>
+                            <th class="text-center" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">CLIENT DEPUIS LE</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pierre in displayUsers %}
+                        <tr>
+                            <td class="text-center align-middle">{{ pierre.nom }}<strong></strong></td>
+                            <td class="text-center align-middle">{{ pierre.firstname }}<strong></strong></td>
+                            <td class="text-center align-middle">{{ pierre.email }}<strong></strong></td>
+                            <td class="text-center align-middle">{{ pierre.createdAt | date ('d/m/Y')}}<strong></strong></td>
+                            
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+<div class="alert bg-success text-light">
+                <h2 class="alert-heading my-3" style="color:yellow; text-shadow: 2px 6px 2px black; font-size: 2em;"><i class="fas fa-trophy"></i><strong>LISTING DES CLIENTS 2</strong></h2>
+                <table class="table table-hover text-white">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">NOM</th>
+                            <th class="text-center align-middle" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">PRENOM</th>
+                            <th class="text-center" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">MAIL</th>
+                            <th class="text-center" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">CLIENT DEPUIS LE</th>
+                            <th class="text-center" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">NOMBRE DE COMMANDES</th>
+                            <th class="text-center" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">SOMME TOTALE DEPENSEE</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pierre in displayUsers %}
+                        <tr>
+                            <td class="text-center align-middle">{{ pierre.nom }}<strong></strong></td>
+                            <td class="text-center align-middle">{{ pierre.firstname }}<strong></strong></td>
+                            <td class="text-center align-middle">{{ pierre.email }}<strong></strong></td>
+                            <td class="text-center align-middle">{{ pierre.createdAt | date ('d/m/Y')}}<strong></strong></td>
+                            <td class="text-center align-middle"><strong></strong></td>
+                            <td class="text-center align-middle"><strong></strong></td>
+                            
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
+
+
+
+{% endblock %}  

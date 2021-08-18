@@ -1,0 +1,358 @@
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('assets/css/sidebar.css') }}">
+  <link href={{ asset('assets/css/bootstrap.min.css')}} rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="{{ path('home') }}"><img src="{{ asset('assets/img/coco-tree.png') }}" alt="logo " class="img-fluid"> <b class="text-warning" style="font-size: 1.6rem;">RHUMA SUG</b></a>
+                </li>
+                <hr style="border: 2px solid white;">
+                <li>
+                    <a href="#charts" class="mt-3 mb-3" style="text-indent: 4rem; color: yellow;"><span class="bg-secondary rounded-lg p-2">GRAPHIQUES</span></a>
+                </li>
+                <li>
+                    <a href="#chart-1">Nb de commandes/jours</a>
+                </li>
+                 <li>
+                    <a href="#chart-2">Nb de produits/catégorie</a>
+                </li>
+                 <li>
+                    <a href="#chart-3">Nb de commandes/transporteur</a>
+                </li>
+                <li>
+                    <a href="#utils" class="mt-3 mb-3" style="text-indent: 4rem; color: yellow;"><span class="bg-secondary rounded-lg p-2">SUIVI D'ACTIVITE</span></a>
+                </li>
+                <li>
+                    <a href="#utils-1">Produits les + populaires</a>
+                </li>
+                 <li>
+                    <a href="#utils-2">Produits les - populaires</a>
+                </li>
+                 <li>
+                    <a href="#utils-3">Listing des clients</a>
+                </li>
+                <li>
+                    <a href="#utils-4">Listing des clients 2</a>
+                </li>
+                <li>
+                    <a href="/admin" class="mt-3 mb-3" style="text-indent: 4rem; color: yellow;"><span class="bg-secondary rounded-lg p-2">STASTIQUES</span></a>
+                </li>
+                <hr class="mt-5" style="border: 1px solid white;">
+                <li>
+                    <a href="/admin"><i class="fas fa-undo-alt"></i> Administration du site</a>
+                </li>
+                <hr style="border: 1px solid white;">
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+{# {% block body %} #}
+        <!-- Page Content -->
+        {# <div id="page-content-wrapper"> #}
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        {# <h1>Simple Sidebar</h1>
+                        <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
+                        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
+                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a> #}
+
+                        <h1 class="rounded p-1 bg-warning text-dark text-center mt-2" id="charts">GRAPHIQUES</h1>
+
+                        {# Courbe (line chart) montrant l'évolution du nombre de commandes par jours (commandes = nom de notre graph) #}
+                        <h1 class="rounded p-1 bg-dark text-light text-center mt-3" id="chart-1" >Nombre de commandes / jour</h1>
+                        <canvas id="commandes" width="900" height="400" class="mt-5"></canvas> 
+
+                        <h1 class="rounded bg-dark text-light text-center mt-5" id="chart-2">Nombre de produits / catégorie</h1>
+                        <canvas id="categories" width="900" height="400" class="mt-5"></canvas>
+
+                        {# <h1 class="rounded bg-dark text-light text-center mt-5" id="chart-3">Nombre de commandes / transporteur</h1>
+                        <canvas id="commandes2" width="900" height="400" class="mt-5"></canvas>  #}
+
+                        {# {{ dump() }} #}
+
+                        <h1 class="rounded p-1 bg-warning text-dark text-center mt-5" id="utils">SUIVI D'ACTIVITE</h1>
+
+
+                <div class="alert bg-success text-light mt-4" id="utils-1">
+                <h2 class="alert-heading my-3" style="color:yellow; text-shadow: 2px 6px 2px black; font-size: 2em;"><i class="fas fa-arrow-circle-up"></i><strong> PRODUITS LES PLUS POPULAIRES</strong></h2>
+                <table class="table table-hover text-white">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">PRODUIT</th>
+                            <th class="text-center align-middle" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">QUANTITE</th>
+                            <th class="text-center" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">C.A.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in bestProducts %}
+                        <tr>
+                            <td class="text-center align-middle">{{ product.produit }}<strong></strong></td>
+                            <td class="text-center align-middle">{{ product.quantity }}<strong></strong></td>
+                            <td class="text-center align-middle">{{ product.prix }} €<strong></strong></td>
+                            
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+<div class="alert bg-danger text-light mt-4" id="utils-2">
+                <h2 class="alert-heading my-3" style="color:yellow; text-shadow: 2px 6px 2px black; font-size: 2em;"><i class="fas fa-arrow-circle-down"></i><strong> PRODUITS LES MOINS POPULAIRES</strong></h2>
+                <table class="table table-hover text-white">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">PRODUIT</th>
+                            <th class="text-center align-middle" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">QUANTITE</th>
+                            <th class="text-center" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">C.A.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in worstProducts %}
+                        <tr>
+                            <td class="text-center align-middle">{{ product.produit }}<strong></strong></td>
+                            <td class="text-center align-middle">{{ product.quantity }}<strong></strong></td>
+                            <td class="text-center align-middle">{{ product.prix }} €<strong></strong></td>
+                            
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
+{# <div class="alert bg-primary text-light mt-4" id="utils-3">
+                <h2 class="alert-heading my-3" style="color:white; text-shadow: 2px 6px 2px black; font-size: 2em;"><i class="fas fa-users"></i><strong> LISTING DES CLIENTS : <span class="badge badge-success badge-lg p-3" style="color: yellow;">{{ displayUsers | length}}</span></strong></h2>
+                <table class="table table-hover text-white">
+                    <thead>
+                        <tr>
+                            <th class="text-center align-middle" style="color:white; text-shadow: 4px 6px 4px black; font-size: 1.5em;">NOM</th>
+                            <th class="text-center align-middle" style="color:white; text-shadow: 4px 6px 4px black; font-size: 1.5em;">PRENOM</th>
+                            <th class="text-center align-middle" style="color:white; text-shadow: 4px 6px 4px black; font-size: 1.5em;">MAIL</th>
+                            <th class="text-center align-middle" style="color:white; text-shadow: 4px 6px 4px black; font-size: 1.5em;">CLIENT DEPUIS LE</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in displayUsers %}
+                        <tr>
+                            <td class="text-center align-middle">{{ user.nom }}<strong></strong></td>
+                            <td class="text-center align-middle">{{ user.firstname }}<strong></strong></td>
+                            <td class="text-center align-middle">{{ user.email }}<strong></strong></td>
+                            <td class="text-center align-middle">{{ user.createdAt | date ('d/m/Y')}}<strong></strong></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div> #}
+
+<div class="alert bg-primary text-light mt-4" id="utils-4">
+                <h2 class="alert-heading my-3" style="color:white; text-shadow: 2px 6px 2px black; font-size: 2em;"><i class="fas fa-users"></i><strong> NOMBRE DE COMMANDES PAR CLIENT</strong></h2>
+                <table class="table table-hover text-white">
+                    <thead>
+                        <tr>
+                            <th class="text-center align-middle" style="color:white; text-shadow: 4px 6px 4px black; font-size: 1.5em;">NOM</th>
+                            <th class="text-center align-middle" style="color:white; text-shadow: 4px 6px 4px black; font-size: 1.5em;">PRENOM</th>
+                            <th class="text-center align-middle" style="color:white; text-shadow: 4px 6px 4px black; font-size: 1.5em;">MAIL</th>
+                            <th class="text-center align-middle" style="color:white; text-shadow: 4px 6px 4px black; font-size: 1.5em;">CLIENT DEPUIS LE</th>
+                            <th class="text-center align-middle" style="color:white; text-shadow: 4px 6px 4px black; font-size: 1.5em;">NOMBRE DE COMMANDES</th>
+                            {# <th class="text-center align-middle" style="color:white; text-shadow: 4px 6px 4px black; font-size: 1.5em;">SOMME TOTALE DEPENSEE</th> #}
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in displayUsers %}
+                        <tr>
+                            <td class="text-center align-middle align-middle">{{ user.lastname }}<strong></strong></td>
+                            <td class="text-center align-middle align-middle">{{ user.firstname }}<strong></strong></td>
+                            <td class="text-center align-middle align-middle">{{ user.email }}<strong></strong></td>
+                            <td class="text-center align-middle align-middle">{{ user.createdAt | date ('d/m/Y') }}<strong></strong></td>
+                            <td class="text-center align-middle align-middle">{{ user.number }}<strong></strong></td>
+                            {# <td class="text-center align-middle align-middle">{{ user.lastname }}<strong></strong></td> #}
+                            
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+<div class="alert bg-primary text-light mt-4" id="utils-4">
+                <h2 class="alert-heading my-3" style="color:white; text-shadow: 2px 6px 2px black; font-size: 2em;"><i class="fas fa-users"></i><strong> MONTANT DEPENSE PAR COMMANDE ~ <span class="bg-success rounded-lg p-2" style="color: yellow; box-shadow: 6px 8px 15px black;">PANIER MOYEN =  </span></strong></h2>
+                <table class="table table-hover text-white">
+                    <thead>
+                        <tr>
+                            <th class="text-center align-middle" style="color:white; text-shadow: 4px 6px 4px black; font-size: 1.5em;"># Commande</th>
+                            <th class="text-center align-middle" style="color:white; text-shadow: 4px 6px 4px black; font-size: 1.5em;">Montant dépensé</th>
+                            {# <th class="text-center align-middle" style="color:white; text-shadow: 4px 6px 4px black; font-size: 1.5em;">MAIL</th>
+                            <th class="text-center align-middle" style="color:white; text-shadow: 4px 6px 4px black; font-size: 1.5em;">CLIENT DEPUIS LE</th>
+                            <th class="text-center align-middle" style="color:white; text-shadow: 4px 6px 4px black; font-size: 1.5em;">NOMBRE DE COMMANDES</th>
+                            <th class="text-center align-middle" style="color:white; text-shadow: 4px 6px 4px black; font-size: 1.5em;">SOMME TOTALE DEPENSEE</th>
+                             #}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in displayUsers2 %}
+                        <tr>
+                            <td class="text-center align-middle align-middle">{{ order.commande }}<strong></strong></td>
+                            <td class="text-center align-middle align-middle">{{ order.depense }}<strong></strong></td>
+                            {# <td class="text-center align-middle align-middle">{{ user.email }}<strong></strong></td>
+                            <td class="text-center align-middle align-middle">{{ user.createdAt | date ('d/m/Y') }}<strong></strong></td>
+                            <td class="text-center align-middle align-middle">{{ user.num }}<strong></strong></td> #}
+                            {# <td class="text-center align-middle align-middle">{{ user.spend }}<strong></strong></td> #}
+                            
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
+<div class="alert bg-primary text-light mt-4" id="utils-4">
+                <h2 class="alert-heading my-3" style="color:white; text-shadow: 2px 6px 2px black; font-size: 2em;"><i class="fas fa-users"></i><strong> COMMANDES DU JOUR : <span class="badge badge-success badge-lg p-3" style="color: yellow; box-shadow: 6px 8px 15px black;">{{ todayOrders | length}}</span></strong></h2>
+                <table class="table table-hover text-white">
+                    <thead>
+                        <tr>
+                            <th class="text-center align-middle" style="color:white; text-shadow: 4px 6px 4px black; font-size: 1.5em;">ADRESSE DE LIVRAISON</th>
+                            <th class="text-center align-middle" style="color:white; text-shadow: 4px 6px 4px black; font-size: 1.5em;">TRANSPORTEUR</th>
+                            <th class="text-center align-middle" style="color:white; text-shadow: 4px 6px 4px black; font-size: 1.5em;">REFERENCE COMMANDE</th>
+                            <th class="text-center align-middle" style="color:white; text-shadow: 4px 6px 4px black; font-size: 1.5em;">REFERENCE PAIEMENT</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in todayOrders %}
+                        <tr>
+                            <td class="text-center align-middle align-middle">{{ order.delivery | raw }}<strong></strong></td>
+                            <td class="text-center align-middle align-middle">{{ order.carrierName }}<strong></strong></td>
+                            <td class="text-center align-middle align-middle">{{ order.reference}}<strong></strong></td>
+                            <td class="text-center align-middle align-middle">{{ order.stripeSessionId}}<strong></strong></td>
+                            
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+{% endblock %}
+
+
+
+
+
+{% block javascripts %}
+  <script src="https://kit.fontawesome.com/83f59567d3.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
+
+    {# Pour initialiser notre graphique ! #}
+    <script>
+        {# Je vais chercher l'élément de ma page qui a l'id categories #}
+        let categories = document.querySelector("#categories")
+        {# Je passe l'élément qui va contenir mon graphique dans l'objet Chart() de chart.js et ensuite, je passe un certain nombre d'options #}
+          let categGraph = new Chart(categories, {
+        type: "pie",
+        data: {
+            labels: {{ categName | raw}}, //le filtre TWIG RW permet au JSON de s'afficher correctement
+            datasets: [{
+                label: "Répartition des produits par catégories",
+                data: {{ categCount | raw}},
+                backgroundColor: {{ categColor | raw}},
+            }]
+        }
+    })
+
+
+    let commandes = document.querySelector("#commandes")
+    let comGraph = new Chart(commandes, {
+        type: "line",
+        data: {
+            labels: {{ dates | raw }},
+            datasets: [{
+                label: "Nombre d'annonces",
+                data: {{ commandesCount|raw }}
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    })
+
+
+    {# let commandes2 = document.querySelector("#commandes2")
+    let comGraph2 = new Chart(commandes2, {
+        type: "line",
+        data: {
+            labels: {{ carrierName | raw }},
+            datasets: [{
+                label: "Nombre d'annonces",
+                data: {{ commandesCount|raw }}
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    }) #}
+
+
+    </script>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

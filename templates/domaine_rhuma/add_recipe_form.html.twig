@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gérer mes adresses  - Ma boutique{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+{# <a href="{{ path('domaineRhuma_recipe_add') }}" class="btn btn-warning text-dark btn-md float-right"><i class="fas fa-plus"></i> Ajouter une recette</a> #}
+
+{# <h1><img src="{{ asset('assets/img/letterbox-1.png') }}" alt="Photo de profil" style="width: 60px; height: 60px; border-radius:100%"> Gérer mes adresses<h1> #}
+<h1 class="text-warning">AJOUTER UNE RECETTE<h1>
+{# <a href="{{ path('account_address') }}">Retour</a> #}
+<div class="dropdown-divider"></div>
+
+{% if notification %}
+	<div class="container col-md-10 mt-5 p-3 bg-success rounded-lg text-center">
+		<p class="text-light p-2"><i class="far fa-check-circle"></i> {{ notification }}</p>
+        <a href="{{ path('recettes') }}" class="btn btn-warning border border-dark"><b>RETOUR A LA LISTE DES RECETTES</b></a>
+	</div>
+{% endif %}
+
+{# {{ form(form) }} #}
+
+<div class="container alert alert-warning rounded-lg my-5 p-4">
+
+{{ form_start(form) }}
+<div class="row">
+    <div class="col-md-4 text-center">
+        <img src="https://images.pexels.com/photos/4279096/pexels-photo-4279096.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="map_picture" class="border border-dark" width="300px", height="250px">
+        {# <div class="mt-2 text-dark"><a href="" class="text-dark" style="font-size: 1.3rem;">Modifier l'illustration</a></div> #}
+        {# <div class="col-md-12"> #}
+            {# <a href="{{ path('account_address_edit', { 'id' : address.id }) }}">Modifier</a> | <a href="{{ path('account_address_delete', { 'id' : address.id }) }}">Supprimer</a> #}
+            {# <p class="card-title col-md-6 float-left"><a href="" class="text-dark" style="font-size: 1.4rem;"><img src="{{ asset('assets/img/edit.png') }}" alt="Modifier" height="40px"> Image</a></p>   #}
+            {# <p class="card-title col-md-6 float-right"><a href="" class="text-dark" style="font-size: 1.4rem;"><img src="{{ asset('assets/img/trash.png') }}" alt="Supprimer" height="35px">Image</a></p> #}
+        {# </div>  #}
+    </div> 
+    <div class="col-md-7 text-left">
+        <div>{{ form_row(form.title) }}</div>
+        <div>{{ form_row(form.resume) }}</div>
+    </div>
+</div> 
+
+<div class="dropdown-divider mt-4"></div>
+    <div class="col-md-6 m-auto">
+        {{ form_row(form.img) }}
+    </div>
+<div class="dropdown-divider mt-4"></div>
+
+<div class="row mt-2">
+    <div class="col-md-12">{{ form_row(form.text) }}</div>
+</div>
+
+<div class="dropdown-divider mt-4"></div>
+
+{# <div class="row mt-2">   
+    <div class="col-md-5 m-auto">{{ form_row(form.img) }}</div>
+</div>
+
+<div class="dropdown-divider"></div> #}
+
+<div class="row mt-2">
+    <div class="col-md-3 m-auto">{{ form_row(form.level) }}</div>
+    <div class="col-md-3 m-auto">{{ form_row(form.time) }}</div>
+    <div class="col-md-3 m-auto">{{ form_row(form.portions) }}</div>
+</div>
+
+<div class="dropdown-divider mt-4"></div>
+
+<div class="row">
+    <div class="col-md-12">{{ form_row(form.ingredients) }}</div> 
+</div>
+
+<div class="dropdown-divider mt-4"></div>
+
+<div class="row mt-5">
+    <div class="col-md-3 m-auto">{{ form_row(form.submit) }}</div>
+</div>
+{{ form_end(form) }}
+
+</div>
+{# 
+<hr class="mt-4"> #}
+
+<div class="dropdown-divider"></div>
+        <div class="container mb-5">
+        <a href="{{ path('recettes') }}" class="text-light text-left" style="font-size: 1.2rem; text-decoration: none;"><i class="fas fa-arrow-circle-left"></i> RETOUR</b></a>
+        </div>
+
+</div>
+
+    
+
+{% endblock %}

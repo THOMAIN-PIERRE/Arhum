@@ -1,0 +1,164 @@
+{{ form_start(form, {attr: {class: 'filter'}}) }}
+<div class="container ">
+<div class="col-md-12">
+<div class="row">
+<div class="accordion col-md-6 border-light" id="accordionExample">
+        <div class="card border-light">
+            <div class="card-header bg-dark" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#collapseOne" 
+                    aria-expanded="true" aria-controls="collapseOne" style="text-decoration: none"><i class="far fa-list-alt mr-2"></i> FILTRER PAR CATEGORIE <a href="" data-toggle="modal" data-target="#fenetreCategories"><span class="ml-5 text-warning"><i class="fas fa-info-circle" style="font-size: 1.5rem;"></i></a></span></button>
+                </h5>
+            </div>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body bg-secondary text-light">
+                    <div class="row d-flex justify-content-around">
+                      <div class="col-md-12">
+                        <p><b>Choix de la catégorie de produit :</b></p>
+                        <h4><b>{{ form_row(form.categories) }}</b></h4>    
+                      </div>
+                      {# <div class="col-md-6 text-light">
+                        <p>Conditionnements</p>
+                        <h4><b>{{ form_row(form.volume) }}</b></h4>                      
+                      </div> #}
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<div class="accordion col-md-6" id="accordionExample">
+        <div class="card">
+            <div class="card-header bg-dark" id="headingTwo">
+                <h5 class="mb-0">
+                    <button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#collapseTwo" 
+                    aria-expanded="true" aria-controls="collapseTwo" style="text-decoration: none"><i class="fas fa-globe-americas mr-2"></i> FILTRER PAR PROVENANCE <a href="" data-toggle="modal" data-target="#fenetreProvenances"><span class="ml-5 text-warning"><i class="fas fa-info-circle" style="font-size: 1.5rem;"></i></a></span></button>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body bg-secondary text-light">
+                    <h4 class="col-md-6"><b>{{ form_row(form.origin) }}</b></h4>
+                </div>
+            </div>
+        </div>
+</div>
+<div class="accordion col-md-6" id="accordionExample">
+        <div class="card">
+            <div class="card-header bg-dark" id="headingThree">
+                <h5 class="mb-0">
+                    <button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#collapseThree" 
+                    aria-expanded="true" aria-controls="collapseThree" style="text-decoration: none"><i class="fas fa-coins text-light mr-2"></i> FILTRER PAR PRIX</button>
+                </h5>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                <div class="card-body bg-secondary">
+                    <div class="row d-flex justify-content-around">
+                      <div class="col-md-4 text-light">
+                          {{ form_row(form.min) }}
+                      </div>
+                      <div class="col-md-4 text-light" style="border-right: 1px solid white;">
+                          {{ form_row(form.max) }}
+                      </div>
+                      <div class="col-md-4">
+                          {{ form_row(form.promo) }}
+                      </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+        <div class="dropdown-divider"></div>
+</div>
+<div class="accordion col-md-6" id="accordionExample">
+        <div class="card">
+            <div class="card-header bg-dark" id="headingFour">
+                <h5 class="mb-0">
+                    <button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#collapseFour" 
+                    aria-expanded="true" aria-controls="collapseFour" style="text-decoration: none"><i class="fas fa-wine-bottle mr-2"></i> CONDITIONNEMENT</button>
+                </h5>
+            </div>
+            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                <div class="card-body bg-secondary text-light">
+                    <div class="col-md-12 text-light">
+                        <p><b>Choisissez le conditionnement recherché :</b></p>
+                        <h4 class="m-auto"><b>{{ form_row(form.volume) }}</b></h4>                      
+                    </div>
+                   {# <h3 class="mt-2"><span class="badge badge-warning">{{ form_row(form.promo) }}<i class="fas fa-tag mr-2"></i> <b>Promo !</b></span></h3>  #}
+                </div>
+            </div>
+        </div>
+        <div class="dropdown-divider"></div>
+</div>
+</div>
+</div>
+    <button type="submit" class="btn btn-primary mt-2 mb-2 w-100"><i class="fas fa-sort"></i><b> FILTRER</b></button>
+</div>
+{{ form_end(form) }}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{# 
+{{ form_start(form, {attr: {class: 'filter'}}) }}
+    
+
+     <div class="container text-light">
+     <div class="row">
+     <div class="col-md-6">
+  <h3>FILTRER PAR ZONE DE PROVENANCE</h3>
+  <h4 class="col-md-6"><b>{{ form_row(form.provenance) }}</b></h4>
+  <div class="dropdown-divider mt-5 mb-4"></div>
+  <h3 class="text-left ">FILTRER PAR PRIX</h3>
+    <div class="row">
+        <div class="col-md-4">
+            {{ form_row(form.min) }}
+        </div>
+        <div class="col-md-4">
+            {{ form_row(form.max) }}
+        </div>
+    </div>
+
+  
+</div>
+
+
+
+   <div class="col-md-6" style="border-left: 1px solid white;">
+  <h3>FILTRER PAR CATEGORIES</h3>
+  
+    <h4><b>{{ form_row(form.categories) }}</b></h4>
+    <div class="dropdown-divider mb-4"></div>
+    <h4><span class="badge badge-warning">{{ form_row(form.promo) }}<i class="fas fa-tag"></i> <b>Promo !</b></span></h4>
+  </div>
+
+<button type="submit" class="btn btn-primary p-2 w-100"><i class="fas fa-filter"></i><b> FILTRER</b></button>
+
+</div>
+
+</div>
+
+</div>
+
+
+    
+    </div>
+
+{{ form_end(form) }} #}

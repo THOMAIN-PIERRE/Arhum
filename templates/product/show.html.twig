@@ -1,0 +1,185 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du produit{% endblock %}
+
+
+{% block stylesheets %}
+    <link href={{ asset('assets/css/show.css')}} rel="stylesheet">
+{% endblock %}
+
+
+{% block body %}
+
+
+<h1 class="text-center text-warning">FICHE PRODUIT</h1>
+<div class="container">
+<div class="col-md-12">
+<div class="row mt-4 border border-light">
+        <div class="zoom-effect-container col-md-5 bg-secondary p-4">
+            <div class="image-card">
+                <img src="/uploads/products/{{ product.illustration }}" alt="{{ product.name }}" class="img-fluid">
+            </div>
+            {# <img class="card-img-top text-center p-3" src="/uploads/products/{{ product.illustration }}" alt="Card image cap" style="height: auto; width: 70%;"> #}
+        </div>
+    <div class="col-md-7">
+        <h3 class="text-light"><b>{{ product.name }}</b> - <span class="badge badge-success mt-3">Disponible</span></h3>
+        {# <p>{{ product.subtitle }}</p> #}
+        {# <h5 class="mb-3 text-dark"><i>Kenzo</i></h5> #}
+        <p class="text-light"><i>{{ product.shortDescription | raw }}</i></p>
+        <div class="row m-auto">
+            <p class="product-page-price badge badge-success p-3 mt-2" style="font-size: 1.4rem"><i class="fas fa-coins text-light mr-2"></i> {{ ((product.price)/100)  | number_format(2, ',', '.')}} €</p>
+            <h5 class="card-title text-light text-left mt-3 ml-3" style="font-size: 1.4rem;">{% if product.promo == 0 %} {% else %}<span class="badge badge-warning float-right p-2"><i class="fas fa-tag mr-2"></i> <b>Promo !</b></span> {% endif %}</h5>
+        </div>
+        <div class="dropdown-divider mt-2"></div>
+        {# <p class="text-light badge badge-success p-2 mr-3 mt-2" style="font-size: 1.4rem;">{{ produit.volume }} </p> #}
+        <p class="text-light badge badge-success p-2 mr-3" style="font-size: 1.4rem;">{{ product.characteristic.degree }} °</p>
+        <p class="{{ product.conditioning.color }}" style="font-size: 1.4rem;">{{ product.conditioning.container }} {{ product.conditioning.volume }}</p>
+        <p class="text-light {{ product.category.color }} p-2 mr-3 mt-2" style="font-size: 1.4rem;">{{ product.category }} </p>
+        {# <p class="text-warning p-2 mr-3 mt-2">{{ product.description | raw }}</p> #}
+        {# <p class="text-light badge badge-secondary p-2 mr-3 mt-2" style="font-size: 1.4rem;"><i class="fas fa-globe-americas mr-1"></i> {{ product.origin }} </p> #}
+        <div class="mt-2 mb-4">
+        {% if product.characteristic.rewards == null %}
+        <span class="bg-secondary text-warning mt-2 mb-3 p-2" style="font-size: 1.2rem;"><i class="fas fa-medal text-warning mr-2"></i> <i>Ce produit n'a pas encore reçu de distinctions.</i></span>
+        {% else %}
+        {# <span class="col-12 badge badge-secondary text-warning text-left mt-2 p-2" style="font-size: 1.2rem;"> #}
+        <div class="bg-secondary text-warning text-center rounded-lg" style="font-size: 1.3rem;">
+            <div class="row m-auto">
+                <div class="col-md-2 m-auto">
+                    <i class="fas fa-medal text-center text-warning"></i>
+                </div>
+                <div class="col-md-10 border-left border-warning text-left">
+                    <p class="m-auto p-1"><b><i>{{ product.characteristic.rewards | raw }}</i></b></p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {# <p class="text-warning mt-2" style="font-size: 1rem; color: orange;"> {{ product.characteristic.rewards | raw }}</p> #}
+        </div>
+        {# <div class="dropdown-divider"></div> #}
+
+        {# <h6 class="card-title text-light text-left mb-2" style='text-align:center;'>{{ product.shortDescription }}</h6>  #}
+
+        {# Afficher les champs de sélection de la taille et de la couleur #}
+        {# <div class="container">
+        <div class="row text-light">
+        {{ form(form) }}
+        </div>
+        </div> #}
+        {# <div class="dropdown-divider"></div> #}
+        {# <a href="" class="btn btn-primary btn-lg mt-2"><img src="{{ asset('assets/img/shopping-cart.png') }}" alt="Mon panier" class="mr-2"> AJOUTER AU PANIER</a>    #}
+        {# {% if app.user %}
+        <a href="{{ path('add_to_cart',{'id':product.id}) }}" class="btn btn-warning btn-lg mt-4 mb-3"><i class="fas fa-shopping-cart text-dark mr-2"></i> <b>AJOUTER AU PANIER</b></a>   
+        {% else %}
+        <a href="{{ path('app_login') }}" class="btn btn-warning btn-lg border border-light mt-4 mb-3"><i class="fas fa-shopping-cart text-dark mr-2"></i> <b>AJOUTER AU PANIER</b></a>   
+        {% endif %} #}
+    </div>
+
+</div>
+
+<div class="container">
+<div class="col-md-12 text-center mt-3 mb-4">
+    {% if app.user %}
+        {# <a href="{{ path('addPanier',{'id':product.id}) }}" class="btn btn-primary btn-lg mt-2 mb-3"><i class="fas fa-shopping-cart text-light mr-2"></i> AJOUTER AU PANIER</a>    #}
+        <a href="{{ path('add_to_cart',{'id':product.id}) }}" class="btn btn-warning btn-lg border-dark mt-4 mb-3" style="box-shadow: 0px 0px 30px white;"><i class="fas fa-shopping-cart text-dark mr-2"></i> <b>AJOUTER AU PANIER</b></a>   
+        {% else %}
+        <a href="{{ path('app_login') }}" class="btn btn-warning btn-lg border border-light mt-4 mb-3"><i class="fas fa-shopping-cart text-dark mr-2"></i> <b>AJOUTER AU PANIER</b></a>   
+    {% endif %}
+</div>
+</div>
+</div>
+
+
+    <div class="col-3 text-left mt-2 mb-5">
+        <div class="dropdown-divider mt-4"></div>
+        <a href="{{ path('products') }}" class="text-light text-left" style="font-size: 1.2rem; text-decoration: none;"><i class="fas fa-arrow-circle-left"></i> RETOUR BOUTIQUE</b></a>
+    <div>
+</div>
+</div>
+
+
+
+
+<div class="d-flex row justify-content-center">
+        <div class="col-md-12 mb-5">
+            <ul class="col-12 nav nav-tabs">
+                <li class="nav-item">
+                    <button class="bg-warning nav-link active text-dark" data-toggle="tab" href="#home"><b>DESCRIPTION</b></button>
+                </li>
+                <li class="nav-item">
+                    <button class="bg-warning nav-link text-dark" data-toggle="tab" href="#menu1"><b>CARACTERISTIQUES</b></button>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane container active bg-dark p-3 rounded text-white" id="home">
+                    <h3 class="text-warning text-center mb-3"><i class="fas fa-wine-bottle"></i> <b>DESCRIPTION</b></h3>
+                    <div class="dropdown-divider mb-4"></div>
+                    <p class="text-light">{{ product.description | raw }}</p>
+                </div>
+                <div class="tab-pane container fade col-12 bg-dark p-3 rounded text-white" id="menu1">
+                
+                    <h3 class="text-warning text-center mb-3"><i class="fas fa-wine-glass-alt"></i> <b>CARACTERISTIQUES DU PRODUIT</b></h3>
+                    <div class="dropdown-divider mb-4"></div>
+                    
+                    <div class="container">
+                    <div class="col-md-12">
+                    <div class="row">
+                    <div class="col-md-6  float-left">
+                    <img src="/uploads/products/{{ product.illustration }}" alt="{{ product.name }}" class="img-fluid">
+                    </div>
+
+                    <div class="col-md-6 text-light">
+                    <table class="table">
+                    <tbody class="table table-hover table-light">
+                        <tr>
+                        <th scope="row">Type d'alcool</th>
+                        <td>{{ product.characteristic.type }}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row" style="width: 100px;">Provenance</th>
+                        <td>{{ product.characteristic.origin }}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">Label</th>
+                        <td>{{ product.characteristic.label }}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">Distillation</th>
+                        <td>{{ product.characteristic.distillation }}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">Vieillissement</th>
+                        <td>{{ product.characteristic.aging }}</td>
+                        </tr>
+                        <th scope="row">Millésime</th>
+                        <td>{{ product.characteristic.vintage }}</td>
+                        </tr>
+                        {# <tr>
+                        <th scope="row">Volume</th>
+                        <td>{{ product.volume }}</td>
+                        </tr> #}
+                        <tr>
+                        <th scope="row">Degré</th>
+                        <td>{{ product.characteristic.degree }}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">Prix et récompenses</th>
+                        <td>{{ product.characteristic.rewards | raw }}</td>
+                        </tr>
+                    </tbody>
+                    </table>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+{% endblock %} 
+
